@@ -2,10 +2,8 @@
   <div id="app">
       <h1>ぼくのかんがえたさいきょーのおーだー2020</h1>
       <h2>リーグを選んでね</h2>
-      <input type="radio" id="central" value="central" v-model="selectLeague" checked>
-      <label for="central">セ・リーグ</label>
-      <input type="radio" id="pacific" value="pacific" v-model="selectLeague">
-      <label for="pacific">パ・リーグ</label><br>
+      <label><input type="radio" id="central" value="central" v-model="selectLeague" checked>セ・リーグ</label>
+      <label><input type="radio" id="pacific" value="pacific" v-model="selectLeague">パ・リーグ</label><br>
       <span>選択したのは{{ selectLeague }}です。</span>
       <h2>球団を選んでね</h2>
       <select v-model="selectTeam" v-if="selectLeague === 'central'">
