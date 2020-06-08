@@ -1,35 +1,35 @@
 <template>
   <div id="app">
-      <h1>ぼくのかんがえたさいきょーのおーだー2020</h1>
-      <h2>リーグを選んでね</h2>
-      <label><input type="radio" id="central" value="central" v-model="selectLeague" checked>セ・リーグ</label>
-      <label><input type="radio" id="pacific" value="pacific" v-model="selectLeague">パ・リーグ</label><br>
-      <span>選択したのは{{ selectLeague }}です。</span>
-      <h2>球団を選んでね</h2>
-      <select v-model="selectTeam" v-if="selectLeague === 'central'">
-          <option disabled value="">球団を選択してください</option>
-          <option v-for="(team, index) in centralLeague" :key="index">{{ team }}</option>
-      </select>
-      <select v-model="selectTeam" v-if="selectLeague === 'pacific'">
-          <option disabled value="">球団を選択してください</option>
-          <option v-for="(team, index) in pacificLeague" :key="index">{{ team }}</option>
-      </select><br>
-      <span>選択したのは{{ selectTeam }}です。</span>
-      <h2>打順を組んでね</h2>
-      <ol>
-        <li v-for="selectPlayer in selectPlayers">
-          <select v-model="selectPlayer.position">
-            <option disabled value="">ポジション</option>
-            <option v-for="(position, index) in positions" :key="index">{{ position }}</option>
-          </select>
-          <select v-model="selectPlayer.player">
-            <option disabled value="">選手</option>
-            <option v-for="(player, index) in players" :key="index">{{ player }}</option>
-          </select>
-          {{ selectPlayer }}
-        </li>
-      </ol>
-    </div>
+    <h1>ぼくのかんがえたさいきょーのおーだー2020</h1>
+    <h2>リーグを選んでね</h2>
+    <label><input type="radio" id="central" value="central" v-model="selectLeague" checked>セ・リーグ</label>
+    <label><input type="radio" id="pacific" value="pacific" v-model="selectLeague">パ・リーグ</label><br>
+    <span>選択したのは{{ selectLeague }}です。</span>
+    <h2>球団を選んでね</h2>
+    <select v-model="selectTeam" v-if="selectLeague === 'central'">
+      <option disabled value="">球団を選択してください</option>
+      <option v-for="(team, index) in centralLeague" :key="index">{{ team }}</option>
+    </select>
+    <select v-model="selectTeam" v-if="selectLeague === 'pacific'">
+      <option disabled value="">球団を選択してください</option>
+      <option v-for="(team, index) in pacificLeague" :key="index">{{ team }}</option>
+    </select><br>
+    <span>選択したのは{{ selectTeam }}です。</span>
+    <h2>打順を組んでね</h2>
+    <ol>
+      <li v-for="selectPlayer in selectPlayers">
+        <select v-model="selectPlayer.position">
+          <option disabled value="">ポジション</option>
+          <option v-for="(position, index) in positions" :key="index">{{ position }}</option>
+        </select>
+        <select v-model="selectPlayer.player">
+          <option disabled value="">選手</option>
+          <option v-for="(player, index) in players" :key="index">{{ player }}</option>
+        </select>
+        {{ selectPlayer }}
+      </li>
+    </ol>
+  </div>
 </template>
 
 <script>
