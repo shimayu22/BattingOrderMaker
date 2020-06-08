@@ -17,19 +17,16 @@
       <span>選択したのは{{ selectTeam }}です。</span>
       <h2>打順を組んでね</h2>
       <ol>
-        <li v-for="(n, index) in 9" :key="index">
-          <select v-model="selectPosition" v-if="selectLeague === 'central'">
+        <li v-for="selectPlayer in selectPlayers">
+          <select v-model="selectPlayer.position">
             <option disabled value="">ポジション</option>
-            <option v-for="(position, index) in centralLeaguePositions" :key="index">{{ position }}</option>
+            <option v-for="(position, index) in positions" :key="index">{{ position }}</option>
           </select>
-          <select v-model="selectPosition" v-if="selectLeague === 'pacific'">
-            <option disabled value="">ポジション</option>
-            <option v-for="(position, index) in pacificLeaguePositions" :key="index">{{ position }}</option>
-          </select>
-          <select v-model="selectPlayer">
+          <select v-model="selectPlayer.player">
             <option disabled value="">選手</option>
             <option v-for="(player, index) in players" :key="index">{{ player }}</option>
           </select>
+          {{ selectPlayer }}
         </li>
       </ol>
     </div>
@@ -44,9 +41,17 @@ export default {
       centralLeague: ['読売ジャイアンツ', '横浜DeNAベイスターズ', '阪神タイガース', '広島東洋カープ', '中日ドラゴンズ', '東京ヤクルトスワローズ'],
       pacificLeague: ['埼玉西武ライオンズ', '福岡ソフトバンクホークス', '東北楽天ゴールデンイーグルス', '千葉ロッテマリーンズ', '北海道日本ハムファイターズ', 'オリックス・バファローズ'],
       selectTeam: '',
-      centralLeaguePositions: ['投', '捕', '一', '二', '三', '遊', '左', '中', '右'],
-      pacificLeaguePositions: ['捕', '一', '二', '三', '遊', '左', '中', '右', 'DH'],
-      players: ['清水優心', '中田翔', '渡邉諒', '平沼翔太', '中島卓也', '王柏融', '西川遥輝', '大田泰示', '近藤健介']
+      positions: ['投', '捕', '一', '二', '三', '遊', '左', '中', '右', 'DH'],
+      players: ['清水優心', '中田翔', '渡邉諒', '平沼翔太', '中島卓也', '王柏融', '西川遥輝', '大田泰示', '近藤健介'],
+      selectPlayers: [{'order': 1, 'position': '', 'player': ''},
+                      {'order': 2, 'position': '', 'player': ''},
+                      {'order': 3, 'position': '', 'player': ''},
+                      {'order': 4, 'position': '', 'player': ''},
+                      {'order': 5, 'position': '', 'player': ''},
+                      {'order': 6, 'position': '', 'player': ''},
+                      {'order': 7, 'position': '', 'player': ''},
+                      {'order': 8, 'position': '', 'player': ''},
+                      {'order': 9, 'position': '', 'player': ''}]
     }
   }
 }
