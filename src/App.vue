@@ -5,26 +5,28 @@
     <label><input type="radio" id="central" value="central" v-model="selectLeague" checked>セ・リーグ</label>
     <label><input type="radio" id="pacific" value="pacific" v-model="selectLeague">パ・リーグ</label><br>
     <span>選択したのは{{ selectLeague }}です。</span>
+
     <h2>球団を選んでね</h2>
     <select v-model="selectTeam" v-if="selectLeague === 'central'">
       <option disabled value="">球団を選択してください</option>
-      <option v-for="(team, index) in centralLeague" :key="index">{{ team }}</option>
+      <option v-for="(team, index) in centralLeague" :key="index" :value="team.jsonName">{{ team.displayName }}</option>
     </select>
     <select v-model="selectTeam" v-if="selectLeague === 'pacific'">
       <option disabled value="">球団を選択してください</option>
-      <option v-for="(team, index) in pacificLeague" :key="index">{{ team }}</option>
+      <option v-for="(team, index) in pacificLeague" :key="index" :value="team.jsonName">{{ team.displayName }}</option>
     </select><br>
     <span>選択したのは{{ selectTeam }}です。</span>
+
     <h2>打順を組んでね</h2>
     <ol>
-      <li v-for="selectPlayer in selectPlayers">
+      <li v-for="(selectPlayer, index) in selectPlayers" :key="index">
         <select v-model="selectPlayer.position">
           <option disabled value="">ポジション</option>
           <option v-for="(position, index) in positions" :key="index">{{ position }}</option>
         </select>
-        <select v-model="selectPlayer.player">
+        <select v-model="selectPlayer.player" v-if="selectTeam === 'fighters'">
           <option disabled value="">選手</option>
-          <option v-for="(player, index) in players" :key="index">{{ player }}</option>
+          <option v-for="(player, index) in fighters_players" :key="index" :value="player">{{ player.name }}</option>
         </select>
         {{ selectPlayer }}
       </li>
@@ -33,25 +35,54 @@
 </template>
 
 <script>
+import giants from '../src/assets/giants.json'
+import baystars from '../src/assets/baystars.json'
+import tigers from '../src/assets/tigers.json'
+import carp from '../src/assets/carp.json'
+import dragons from '../src/assets/dragons.json'
+import swallows from '../src/assets/swallows.json'
+import lions from '../src/assets/lions.json'
+import hawks from '../src/assets/hawks.json'
+import eagles from '../src/assets/eagles.json'
+import marines from '../src/assets/marines.json'
+import fighters from '../src/assets/fighters.json'
+import buffaloes from '../src/assets/buffaloes.json'
+
 export default {
   name: 'app',
   data () {
     return {
       selectLeague: 'central',
-      centralLeague: ['読売ジャイアンツ', '横浜DeNAベイスターズ', '阪神タイガース', '広島東洋カープ', '中日ドラゴンズ', '東京ヤクルトスワローズ'],
-      pacificLeague: ['埼玉西武ライオンズ', '福岡ソフトバンクホークス', '東北楽天ゴールデンイーグルス', '千葉ロッテマリーンズ', '北海道日本ハムファイターズ', 'オリックス・バファローズ'],
+      centralLeague: [
+                        {'jsonName': 'giants', 'displayName': '読売ジャイアンツ', 'hashTag': '#giants'},
+                        {'jsonName': 'baystars', 'displayName': '横浜DeNAベイスターズ', 'hashTag': '#baystars'},
+                        {'jsonName': 'tigers', 'displayName': '阪神タイガース', 'hashTag': '#tigers'},
+                        {'jsonName': 'carp', 'displayName': '広島東洋カープ', 'hashTag': '#carp'},
+                        {'jsonName': 'dragons', 'displayName': '中日ドラゴンズ', 'hashTag': '#dragons'},
+                        {'jsonName': 'swallows', 'displayName': '東京ヤクルトスワローズ', 'hashTag': '#swallows'}
+                      ],
+      pacificLeague: [
+                        {'jsonName': 'lions', 'displayName': '埼玉西武ライオンズ', 'hashTag': '#seibulions'}, 
+                        {'jsonName': 'hawks', 'displayName': '福岡ソフトバンクホークス', 'hashTag': '#sbhawks'},
+                        {'jsonName': 'eagles', 'displayName': '東北楽天ゴールデンイーグルス', 'hashTag': '#RakutenEagles'},
+                        {'jsonName': 'marines', 'displayName': '千葉ロッテマリーンズ', 'hashTag': '#chibalotte'},
+                        {'jsonName': 'fighters', 'displayName': '北海道日本ハムファイターズ', 'hashTag': '#lovefighters'},
+                        {'jsonName': 'buffaloes', 'displayName': 'オリックス・バファローズ', 'hashTag': '#Bs2020'}
+                      ],
       selectTeam: '',
+      fighters_players: fighters,
       positions: ['投', '捕', '一', '二', '三', '遊', '左', '中', '右', 'DH'],
-      players: ['清水優心', '中田翔', '渡邉諒', '平沼翔太', '中島卓也', '王柏融', '西川遥輝', '大田泰示', '近藤健介'],
-      selectPlayers: [{'order': 1, 'position': '', 'player': ''},
-                      {'order': 2, 'position': '', 'player': ''},
-                      {'order': 3, 'position': '', 'player': ''},
-                      {'order': 4, 'position': '', 'player': ''},
-                      {'order': 5, 'position': '', 'player': ''},
-                      {'order': 6, 'position': '', 'player': ''},
-                      {'order': 7, 'position': '', 'player': ''},
-                      {'order': 8, 'position': '', 'player': ''},
-                      {'order': 9, 'position': '', 'player': ''}]
+      selectPlayers: [
+                        {'order': 1, 'position': '', 'player': ''},
+                        {'order': 2, 'position': '', 'player': ''},
+                        {'order': 3, 'position': '', 'player': ''},
+                        {'order': 4, 'position': '', 'player': ''},
+                        {'order': 5, 'position': '', 'player': ''},
+                        {'order': 6, 'position': '', 'player': ''},
+                        {'order': 7, 'position': '', 'player': ''},
+                        {'order': 8, 'position': '', 'player': ''},
+                        {'order': 9, 'position': '', 'player': ''}
+                      ]
     }
   }
 }
