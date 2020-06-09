@@ -7,15 +7,12 @@
     <span>選択したのは{{ selectLeague }}です。</span>
 
     <h2>球団を選んでね</h2>
-    <select v-model="selectTeam" v-if="selectLeague === 'central'">
+    <select v-model="selectTeam">
       <option disabled value="">球団を選択してください</option>
-      <option v-for="(team, index) in centralLeague" :key="index" :value="team.jsonName">{{ team.displayName }}</option>
+      <option v-for="(team, index) in npb[selectLeague]" :key="index" :value="team">{{ team.displayName }}</option>
     </select>
-    <select v-model="selectTeam" v-if="selectLeague === 'pacific'">
-      <option disabled value="">球団を選択してください</option>
-      <option v-for="(team, index) in pacificLeague" :key="index" :value="team.jsonName">{{ team.displayName }}</option>
-    </select><br>
-    <span>選択したのは{{ selectTeam }}です。</span>
+    <br>
+    <span>選択したのは{{ selectTeam.displayName }}です。</span>
 
     <h2>打順を組んでね</h2>
     <ol>
@@ -24,9 +21,9 @@
           <option disabled value="">ポジション</option>
           <option v-for="(position, index) in positions" :key="index">{{ position }}</option>
         </select>
-        <select v-model="selectPlayer.player" v-if="selectTeam === 'fighters'">
+        <select v-model="selectPlayer.player">
           <option disabled value="">選手</option>
-          <option v-for="(player, index) in fighters_players" :key="index" :value="player">{{ player.name }}</option>
+          <option v-for="(player, index) in npbPlayers[selectTeam.jsonName]" :key="index" :value="player">{{ player.name }}</option>
         </select>
         {{ selectPlayer }}
       </li>
@@ -53,24 +50,26 @@ export default {
   data () {
     return {
       selectLeague: 'central',
-      centralLeague: [
-                        {'jsonName': 'giants', 'displayName': '読売ジャイアンツ', 'hashTag': '#giants'},
-                        {'jsonName': 'baystars', 'displayName': '横浜DeNAベイスターズ', 'hashTag': '#baystars'},
-                        {'jsonName': 'tigers', 'displayName': '阪神タイガース', 'hashTag': '#tigers'},
-                        {'jsonName': 'carp', 'displayName': '広島東洋カープ', 'hashTag': '#carp'},
-                        {'jsonName': 'dragons', 'displayName': '中日ドラゴンズ', 'hashTag': '#dragons'},
-                        {'jsonName': 'swallows', 'displayName': '東京ヤクルトスワローズ', 'hashTag': '#swallows'}
-                      ],
-      pacificLeague: [
-                        {'jsonName': 'lions', 'displayName': '埼玉西武ライオンズ', 'hashTag': '#seibulions'}, 
-                        {'jsonName': 'hawks', 'displayName': '福岡ソフトバンクホークス', 'hashTag': '#sbhawks'},
-                        {'jsonName': 'eagles', 'displayName': '東北楽天ゴールデンイーグルス', 'hashTag': '#RakutenEagles'},
-                        {'jsonName': 'marines', 'displayName': '千葉ロッテマリーンズ', 'hashTag': '#chibalotte'},
-                        {'jsonName': 'fighters', 'displayName': '北海道日本ハムファイターズ', 'hashTag': '#lovefighters'},
-                        {'jsonName': 'buffaloes', 'displayName': 'オリックス・バファローズ', 'hashTag': '#Bs2020'}
-                      ],
-      selectTeam: '',
-      fighters_players: fighters,
+      npb: {'central': [
+                                {'jsonName': 'giants', 'displayName': '読売ジャイアンツ', 'hashTag': '#giants'},
+                                {'jsonName': 'baystars', 'displayName': '横浜DeNAベイスターズ', 'hashTag': '#baystars'},
+                                {'jsonName': 'tigers', 'displayName': '阪神タイガース', 'hashTag': '#tigers'},
+                                {'jsonName': 'carp', 'displayName': '広島東洋カープ', 'hashTag': '#carp'},
+                                {'jsonName': 'dragons', 'displayName': '中日ドラゴンズ', 'hashTag': '#dragons'},
+                                {'jsonName': 'swallows', 'displayName': '東京ヤクルトスワローズ', 'hashTag': '#swallows'}
+                              ],
+            'pacific': [
+                                {'jsonName': 'lions', 'displayName': '埼玉西武ライオンズ', 'hashTag': '#seibulions'}, 
+                                {'jsonName': 'hawks', 'displayName': '福岡ソフトバンクホークス', 'hashTag': '#sbhawks'},
+                                {'jsonName': 'eagles', 'displayName': '東北楽天ゴールデンイーグルス', 'hashTag': '#RakutenEagles'},
+                                {'jsonName': 'marines', 'displayName': '千葉ロッテマリーンズ', 'hashTag': '#chibalotte'},
+                                {'jsonName': 'fighters', 'displayName': '北海道日本ハムファイターズ', 'hashTag': '#lovefighters'},
+                                {'jsonName': 'buffaloes', 'displayName': 'オリックス・バファローズ', 'hashTag': '#Bs2020'}
+                              ]
+           },
+      selectTeam: {'jsonName': 'giants', 'displayName': '読売ジャイアンツ', 'hashTag': '#giants'},
+      npbPlayers: {'giants':giants, 'baystars': baystars, 'tigers': tigers, 'carp': carp, 'dragons': dragons, 'swallows': swallows,
+                    'lions': lions, 'hawks': hawks, 'eagles':eagles, 'marines': marines, 'fighters': fighters, 'buffaloes': buffaloes},
       positions: ['投', '捕', '一', '二', '三', '遊', '左', '中', '右', 'DH'],
       selectPlayers: [
                         {'order': 1, 'position': '', 'player': ''},
