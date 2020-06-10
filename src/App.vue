@@ -114,8 +114,8 @@ export default {
             }
           }
           if (e['player'] !== '') {
-            if (positions.indexOf(e["player"]["name"]) === -1) {
-              positions.push(e["player"]["name"]);
+            if (players.indexOf(e["player"]["name"]) === -1) {
+              players.push(e["player"]["name"]);
               e["duplicatedPlayer"] = false;
             }else{
               e["duplicatedPlayer"] = true;
