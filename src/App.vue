@@ -15,7 +15,6 @@
     </select>
 
     <h2>打順を組んでね</h2>
-    <p :class="{ notes: notesActive}">※重複している箇所があります</p>
     <ol>
       <li v-for="(selectPlayer, index) in selectPlayers" :key="index">
         <select v-model="selectPlayer.position" :class="{ duplicated: selectPlayer.duplicatedPosition }">
@@ -25,11 +24,11 @@
         <select v-model="selectPlayer.player" :class="{ duplicated: selectPlayer.duplicatedPlayer }">
           <option disabled value="">選手</option>
           <option v-for="(player, index) in npbPlayers[selectTeam.jsonName]" :key="index" :value="player">{{ player.name }}</option>
-        </select><br>{{ selectPlayer }}
+        </select>
       </li>
     </ol>
     <h3>プレビュー</h3>
-    <img src="../src/assets/member.png" class="ordersheet" />
+    <img src="/member.png" class="ordersheet" />
   </div>
 </template>
 
@@ -95,8 +94,7 @@ export default {
                         {'order': 7, 'position': '', 'player': '', 'duplicatedPosition': false, 'duplicatedPlayer': false},
                         {'order': 8, 'position': '', 'player': '', 'duplicatedPosition': false, 'duplicatedPlayer': false},
                         {'order': 9, 'position': '', 'player': '', 'duplicatedPosition': false, 'duplicatedPlayer': false}
-                     ],
-      notesActive: false
+                     ]
     }
   },
   watch: {
