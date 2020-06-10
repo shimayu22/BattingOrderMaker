@@ -1,6 +1,10 @@
 <template>
   <div id="app">
     <h1>ぼくのかんがえたさいきょーのおーだー2020</h1>
+    <h2>監督名を入れてね（任意）</h2>
+    <input v-model="userName" placeholder="名無し">監督<br>
+    <span>{{ userName }}</span>
+
     <h2>リーグを選んでね</h2>
     <label><input type="radio" id="central" value="central" v-model="selectLeague" checked>セ・リーグ</label>
     <label><input type="radio" id="pacific" value="pacific" v-model="selectLeague">パ・リーグ</label><br>
@@ -49,23 +53,24 @@ export default {
   name: 'app',
   data () {
     return {
+      userName: '',
       selectLeague: 'central',
       npb: {'central': [
-                                {'jsonName': 'giants', 'displayName': '読売ジャイアンツ', 'hashTag': '#giants'},
-                                {'jsonName': 'baystars', 'displayName': '横浜DeNAベイスターズ', 'hashTag': '#baystars'},
-                                {'jsonName': 'tigers', 'displayName': '阪神タイガース', 'hashTag': '#tigers'},
-                                {'jsonName': 'carp', 'displayName': '広島東洋カープ', 'hashTag': '#carp'},
-                                {'jsonName': 'dragons', 'displayName': '中日ドラゴンズ', 'hashTag': '#dragons'},
-                                {'jsonName': 'swallows', 'displayName': '東京ヤクルトスワローズ', 'hashTag': '#swallows'}
-                              ],
+                          {'jsonName': 'giants', 'displayName': '読売ジャイアンツ', 'hashTag': '#giants'},
+                          {'jsonName': 'baystars', 'displayName': '横浜DeNAベイスターズ', 'hashTag': '#baystars'},
+                          {'jsonName': 'tigers', 'displayName': '阪神タイガース', 'hashTag': '#tigers'},
+                          {'jsonName': 'carp', 'displayName': '広島東洋カープ', 'hashTag': '#carp'},
+                          {'jsonName': 'dragons', 'displayName': '中日ドラゴンズ', 'hashTag': '#dragons'},
+                          {'jsonName': 'swallows', 'displayName': '東京ヤクルトスワローズ', 'hashTag': '#swallows'}
+                       ],
             'pacific': [
-                                {'jsonName': 'lions', 'displayName': '埼玉西武ライオンズ', 'hashTag': '#seibulions'}, 
-                                {'jsonName': 'hawks', 'displayName': '福岡ソフトバンクホークス', 'hashTag': '#sbhawks'},
-                                {'jsonName': 'eagles', 'displayName': '東北楽天ゴールデンイーグルス', 'hashTag': '#RakutenEagles'},
-                                {'jsonName': 'marines', 'displayName': '千葉ロッテマリーンズ', 'hashTag': '#chibalotte'},
-                                {'jsonName': 'fighters', 'displayName': '北海道日本ハムファイターズ', 'hashTag': '#lovefighters'},
-                                {'jsonName': 'buffaloes', 'displayName': 'オリックス・バファローズ', 'hashTag': '#Bs2020'}
-                              ]
+                          {'jsonName': 'lions', 'displayName': '埼玉西武ライオンズ', 'hashTag': '#seibulions'}, 
+                          {'jsonName': 'hawks', 'displayName': '福岡ソフトバンクホークス', 'hashTag': '#sbhawks'},
+                          {'jsonName': 'eagles', 'displayName': '東北楽天ゴールデンイーグルス', 'hashTag': '#RakutenEagles'},
+                          {'jsonName': 'marines', 'displayName': '千葉ロッテマリーンズ', 'hashTag': '#chibalotte'},
+                          {'jsonName': 'fighters', 'displayName': '北海道日本ハムファイターズ', 'hashTag': '#lovefighters'},
+                          {'jsonName': 'buffaloes', 'displayName': 'オリックス・バファローズ', 'hashTag': '#Bs2020'}
+                       ]
            },
       selectTeam: {'jsonName': 'giants', 'displayName': '読売ジャイアンツ', 'hashTag': '#giants'},
       npbPlayers: {'giants':giants, 'baystars': baystars, 'tigers': tigers, 'carp': carp, 'dragons': dragons, 'swallows': swallows,
@@ -81,7 +86,7 @@ export default {
                         {'order': 7, 'position': '', 'player': ''},
                         {'order': 8, 'position': '', 'player': ''},
                         {'order': 9, 'position': '', 'player': ''}
-                      ]
+                     ]
     }
   }
 }
