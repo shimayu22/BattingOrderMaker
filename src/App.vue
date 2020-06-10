@@ -21,11 +21,11 @@
     <h2>打順を組んでね</h2>
     <ol>
       <li v-for="(selectPlayer, index) in selectPlayers" :key="index">
-        <select v-model="selectPlayer.position">
+        <select v-model="selectPlayer.position" :class="{ duplicated: selectPlayer.duplicatedPosition }">
           <option disabled value="">ポジション</option>
           <option v-for="(position, index) in positions" :key="index">{{ position }}</option>
         </select>
-        <select v-model="selectPlayer.player">
+        <select v-model="selectPlayer.player" :class="{ duplicated: selectPlayer.duplicatedPlayer }">
           <option disabled value="">選手</option>
           <option v-for="(player, index) in npbPlayers[selectTeam.jsonName]" :key="index" :value="player">{{ player.name }}</option>
         </select>
@@ -34,6 +34,13 @@
     </ol>
   </div>
 </template>
+
+<style>
+.duplicated {
+  border: 2px dashed red
+}
+
+</style>
 
 <script>
 import giants from '../src/assets/giants.json'
@@ -77,15 +84,15 @@ export default {
                     'lions': lions, 'hawks': hawks, 'eagles':eagles, 'marines': marines, 'fighters': fighters, 'buffaloes': buffaloes},
       positions: ['投', '捕', '一', '二', '三', '遊', '左', '中', '右', 'DH'],
       selectPlayers: [
-                        {'order': 1, 'position': '', 'player': ''},
-                        {'order': 2, 'position': '', 'player': ''},
-                        {'order': 3, 'position': '', 'player': ''},
-                        {'order': 4, 'position': '', 'player': ''},
-                        {'order': 5, 'position': '', 'player': ''},
-                        {'order': 6, 'position': '', 'player': ''},
-                        {'order': 7, 'position': '', 'player': ''},
-                        {'order': 8, 'position': '', 'player': ''},
-                        {'order': 9, 'position': '', 'player': ''}
+                        {'order': 1, 'position': '', 'player': '', 'duplicatedPosition': false, 'duplicatedPlayer': false},
+                        {'order': 2, 'position': '', 'player': '', 'duplicatedPosition': true, 'duplicatedPlayer': false},
+                        {'order': 3, 'position': '', 'player': '', 'duplicatedPosition': false, 'duplicatedPlayer': false},
+                        {'order': 4, 'position': '', 'player': '', 'duplicatedPosition': false, 'duplicatedPlayer': false},
+                        {'order': 5, 'position': '', 'player': '', 'duplicatedPosition': false, 'duplicatedPlayer': true},
+                        {'order': 6, 'position': '', 'player': '', 'duplicatedPosition': true, 'duplicatedPlayer': false},
+                        {'order': 7, 'position': '', 'player': '', 'duplicatedPosition': false, 'duplicatedPlayer': false},
+                        {'order': 8, 'position': '', 'player': '', 'duplicatedPosition': false, 'duplicatedPlayer': false},
+                        {'order': 9, 'position': '', 'player': '', 'duplicatedPosition': false, 'duplicatedPlayer': false}
                      ]
     }
   }
