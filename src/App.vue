@@ -2,23 +2,20 @@
   <div id="app">
     <h1>ぼくのかんがえたさいきょーのおーだー2020</h1>
     <h2>監督名を入れてね（任意）</h2>
-    <input v-model="userName" placeholder="名無し">監督<br>
-    <span>{{ userName }}</span>
+    <input v-model="userName" placeholder="名無し">監督
 
     <h2>リーグを選んでね</h2>
     <label><input type="radio" id="central" value="central" v-model="selectLeague" checked>セ・リーグ</label>
-    <label><input type="radio" id="pacific" value="pacific" v-model="selectLeague">パ・リーグ</label><br>
-    <span>選択したのは{{ selectLeague }}です。</span>
+    <label><input type="radio" id="pacific" value="pacific" v-model="selectLeague">パ・リーグ</label>
 
     <h2>球団を選んでね</h2>
     <select v-model="selectTeam">
       <option disabled value="">球団を選択してください</option>
       <option v-for="(team, index) in npb[selectLeague]" :key="index" :value="team">{{ team.displayName }}</option>
     </select>
-    <br>
-    <span>選択したのは{{ selectTeam.displayName }}です。</span>
 
     <h2>打順を組んでね</h2>
+    <p :class="{ notes: notesActive}">※重複している箇所があります</p>
     <ol>
       <li v-for="(selectPlayer, index) in selectPlayers" :key="index">
         <select v-model="selectPlayer.position" :class="{ duplicated: selectPlayer.duplicatedPosition }">
@@ -28,16 +25,21 @@
         <select v-model="selectPlayer.player" :class="{ duplicated: selectPlayer.duplicatedPlayer }">
           <option disabled value="">選手</option>
           <option v-for="(player, index) in npbPlayers[selectTeam.jsonName]" :key="index" :value="player">{{ player.name }}</option>
-        </select>
-        {{ selectPlayer }}
+        </select><br>{{ selectPlayer }}
       </li>
     </ol>
+    <h3>プレビュー</h3>
+    <img src="../src/assets/member.png" class="ordersheet" />
   </div>
 </template>
 
 <style>
 .duplicated {
-  border: 2px dashed red
+  border: 2px dashed red;
+}
+
+.ordersheet {
+  border: 2px solid black;
 }
 
 </style>
@@ -85,15 +87,44 @@ export default {
       positions: ['投', '捕', '一', '二', '三', '遊', '左', '中', '右', 'DH'],
       selectPlayers: [
                         {'order': 1, 'position': '', 'player': '', 'duplicatedPosition': false, 'duplicatedPlayer': false},
-                        {'order': 2, 'position': '', 'player': '', 'duplicatedPosition': true, 'duplicatedPlayer': false},
+                        {'order': 2, 'position': '', 'player': '', 'duplicatedPosition': false, 'duplicatedPlayer': false},
                         {'order': 3, 'position': '', 'player': '', 'duplicatedPosition': false, 'duplicatedPlayer': false},
                         {'order': 4, 'position': '', 'player': '', 'duplicatedPosition': false, 'duplicatedPlayer': false},
-                        {'order': 5, 'position': '', 'player': '', 'duplicatedPosition': false, 'duplicatedPlayer': true},
-                        {'order': 6, 'position': '', 'player': '', 'duplicatedPosition': true, 'duplicatedPlayer': false},
+                        {'order': 5, 'position': '', 'player': '', 'duplicatedPosition': false, 'duplicatedPlayer': false},
+                        {'order': 6, 'position': '', 'player': '', 'duplicatedPosition': false, 'duplicatedPlayer': false},
                         {'order': 7, 'position': '', 'player': '', 'duplicatedPosition': false, 'duplicatedPlayer': false},
                         {'order': 8, 'position': '', 'player': '', 'duplicatedPosition': false, 'duplicatedPlayer': false},
                         {'order': 9, 'position': '', 'player': '', 'duplicatedPosition': false, 'duplicatedPlayer': false}
-                     ]
+                     ],
+      notesActive: false
+    }
+  },
+  watch: {
+    selectPlayers: {
+      handler: function() {
+        let positions = [];
+        let players = [];
+        this.selectPlayers.filter(e => {
+          if (e["position"].length > 0) {
+            if (positions.indexOf(e["position"]) === -1) {
+              positions.push(e["position"]);
+              e["duplicatedPosition"] = false;
+            }else{
+              e["duplicatedPosition"] = true;
+            }
+          }
+          if (e['player'] !== '') {
+            if (positions.indexOf(e["player"]["name"]) === -1) {
+              positions.push(e["player"]["name"]);
+              e["duplicatedPlayer"] = false;
+            }else{
+              e["duplicatedPlayer"] = true;
+            }
+          }
+          return e;
+        });
+      },
+      deep: true
     }
   }
 }
