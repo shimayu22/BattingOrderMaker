@@ -28,74 +28,75 @@
       </li>
     </ol>
     <h3>プレビュー</h3>
-    <div class="preview">
-      <div class="preview-inner">
-        <div class="team-name"> {{ selectTeam['displayName'] }} </div>
-        <div class="user-name"> {{ userName }}</div>
+    <div id="preview">
+      <div id="preview-inner">
+        <div id="team-name"> {{ selectTeam['displayName'] }} </div>
+        <div id="user-name"> {{ userName }}</div>
 
-        <div class="position-1">{{ selectPlayers[0]['position'] }}</div>
-        <div class="player-name-1">{{ selectPlayers[0]['player']['name'] }}</div>
-        <div class="id-1">{{ selectPlayers[0]['player']['id'] }}</div>
-        <div class="bt-1">{{ selectPlayers[0]['player']['bt'] }}</div>
+        <div id="position-1">{{ selectPlayers[0]['position'] }}</div>
+        <div id="player-name-1">{{ selectPlayers[0]['player']['name'] }}</div>
+        <div id="id-1">{{ selectPlayers[0]['player']['id'] }}</div>
+        <div id="bt-1">{{ selectPlayers[0]['player']['bt'] }}</div>
 
 
-        
+
       </div>
     </div>
+    <button @click="generate">画像を生成する</button>
+    <div id="result"></div>
   </div>
 </template>
 
 <style type="text/css">
-.duplicated {
+#duplicated {
   border: 2px dashed red;
 }
 
-.preview {
+#preview {
   overflow: auto;
-  width: 100%;
-}
-
-.preview-inner {
-  background: url(/member.png) no-repeat left bottom;
-  background-size: 400px 400px;
-  position: relative;
-  padding-top: 60px;
-  padding-bottom: 340px;
   width: 400px;
 }
 
-.team-name {
+#preview-inner {
+  background: url(/member.png) no-repeat left bottom;
+  background-size: 400px 400px;
+  position: relative;
+  width: 400px;
+  height: 400px;
+}
+
+#team-name {
   position: absolute;
   top: 35px;
   left: 8px;
 }
 
-.user-name {
+#user-name {
   position: absolute;
   top: 59px;
   left: 60px;
   font-size: 12px;
 }
 
-.position-1 {
+#position-1 {
   position: absolute;
   top: 107px;
   left: 68px;
 }
 
-.player-name-1 {
+#player-name-1 {
   position: absolute;
   top: 107px;
   left: 170px;
 }
 
-.id-1 {
+#id-1 {
   position: absolute;
   top: 107px;
   left: 320px;
 }
 
-.bt-1 {
+#bt-1 {
   position: absolute;
   top: 107px;
   left: 355px;
@@ -104,18 +105,19 @@
 </style>
 
 <script>
-import giants from '../src/assets/giants.json'
-import baystars from '../src/assets/baystars.json'
-import tigers from '../src/assets/tigers.json'
-import carp from '../src/assets/carp.json'
-import dragons from '../src/assets/dragons.json'
-import swallows from '../src/assets/swallows.json'
-import lions from '../src/assets/lions.json'
-import hawks from '../src/assets/hawks.json'
-import eagles from '../src/assets/eagles.json'
-import marines from '../src/assets/marines.json'
-import fighters from '../src/assets/fighters.json'
-import buffaloes from '../src/assets/buffaloes.json'
+import giants from '../src/assets/giants.json';
+import baystars from '../src/assets/baystars.json';
+import tigers from '../src/assets/tigers.json';
+import carp from '../src/assets/carp.json';
+import dragons from '../src/assets/dragons.json';
+import swallows from '../src/assets/swallows.json';
+import lions from '../src/assets/lions.json';
+import hawks from '../src/assets/hawks.json';
+import eagles from '../src/assets/eagles.json';
+import marines from '../src/assets/marines.json';
+import fighters from '../src/assets/fighters.json';
+import buffaloes from '../src/assets/buffaloes.json';
+import html2canvas from 'html2canvas';
 
 export default {
   name: 'app',
@@ -155,6 +157,15 @@ export default {
                         {'order': 8, 'position': '', 'player': '', 'duplicatedPosition': false, 'duplicatedPlayer': false},
                         {'order': 9, 'position': '', 'player': '', 'duplicatedPosition': false, 'duplicatedPlayer': false}
                      ]
+    }
+  },
+  methods: {
+    generate() {
+      html2canvas(document.getElementById('preview-inner')).then(function(canvas){
+        var result = document.getElementById('result');
+        result.innerHTML = '';
+        result.appendChild(canvas);
+      });
     }
   },
   watch: {
