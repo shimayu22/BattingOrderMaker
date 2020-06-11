@@ -2,7 +2,7 @@
   <div id="app">
     <h1>ぼくのかんがえたさいきょーのおーだー2020</h1>
     <h2>監督名を入れてね（任意）</h2>
-    <input v-model="userName" placeholder="名無し">監督
+    <input v-model="userName">監督
 
     <h2>リーグを選んでね</h2>
     <label><input type="radio" id="central" value="central" v-model="selectLeague" checked>セ・リーグ</label>
@@ -28,17 +28,77 @@
       </li>
     </ol>
     <h3>プレビュー</h3>
-    <img src="/member.png" class="ordersheet" />
+    <div class="preview">
+      <div class="preview-inner">
+        <div class="team-name"> {{ selectTeam['displayName'] }} </div>
+        <div class="user-name"> {{ userName }}</div>
+
+        <div class="position-1">{{ selectPlayers[0]['position'] }}</div>
+        <div class="player-name-1">{{ selectPlayers[0]['player']['name'] }}</div>
+        <div class="id-1">{{ selectPlayers[0]['player']['id'] }}</div>
+        <div class="bt-1">{{ selectPlayers[0]['player']['bt'] }}</div>
+
+
+        
+      </div>
+    </div>
   </div>
 </template>
 
-<style>
+<style type="text/css">
 .duplicated {
   border: 2px dashed red;
 }
 
-.ordersheet {
-  border: 2px solid black;
+.preview {
+  overflow: auto;
+  width: 100%;
+}
+
+.preview-inner {
+  background: url(/member.png) no-repeat left bottom;
+  background-size: 400px 400px;
+  position: relative;
+  padding-top: 60px;
+  padding-bottom: 340px;
+  width: 400px;
+}
+
+.team-name {
+  position: absolute;
+  top: 35px;
+  left: 8px;
+}
+
+.user-name {
+  position: absolute;
+  top: 59px;
+  left: 60px;
+  font-size: 12px;
+}
+
+.position-1 {
+  position: absolute;
+  top: 107px;
+  left: 68px;
+}
+
+.player-name-1 {
+  position: absolute;
+  top: 107px;
+  left: 170px;
+}
+
+.id-1 {
+  position: absolute;
+  top: 107px;
+  left: 320px;
+}
+
+.bt-1 {
+  position: absolute;
+  top: 107px;
+  left: 355px;
 }
 
 </style>
@@ -61,7 +121,7 @@ export default {
   name: 'app',
   data () {
     return {
-      userName: '',
+      userName: '名無しさん',
       selectLeague: 'central',
       npb: {'central': [
                           {'jsonName': 'giants', 'displayName': '読売ジャイアンツ', 'hashTag': '#giants'},
@@ -83,7 +143,7 @@ export default {
       selectTeam: {'jsonName': 'giants', 'displayName': '読売ジャイアンツ', 'hashTag': '#giants'},
       npbPlayers: {'giants':giants, 'baystars': baystars, 'tigers': tigers, 'carp': carp, 'dragons': dragons, 'swallows': swallows,
                     'lions': lions, 'hawks': hawks, 'eagles':eagles, 'marines': marines, 'fighters': fighters, 'buffaloes': buffaloes},
-      positions: ['投', '捕', '一', '二', '三', '遊', '左', '中', '右', 'DH'],
+      positions: ['投', '捕', '一', '二', '三', '遊', '左', '中', '右', 'Ｄ'],
       selectPlayers: [
                         {'order': 1, 'position': '', 'player': '', 'duplicatedPosition': false, 'duplicatedPlayer': false},
                         {'order': 2, 'position': '', 'player': '', 'duplicatedPosition': false, 'duplicatedPlayer': false},
