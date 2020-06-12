@@ -48,7 +48,7 @@
         <div id="team-name"> {{ selectTeam.displayName }} </div>
         <div id="user-name"> {{ userName }}</div>
         <div v-for="(player, index) in selectPlayers" :key="index">
-          <div class="position" :style="{ top: player.top }">{{ player['position'] }}</div>
+          <div class="position" :style="{ top: player.top }">{{ player.position }}</div>
           <div class="player-name" :style="{ top: player.top }">{{ player.player.name }}</div>
           <div class="number" :style="{ top: player.top }">{{ player.player.id }}</div>
           <div class="bt" :style="{ top: player.top }">{{ player.player.bt }}</div>
@@ -83,39 +83,47 @@
   position: relative;
   width: 500px;
   height: 500px;
+}
+
+#team-name, #user-name {
+  position: absolute;
   font-family: "M PLUS Rounded 1c";
 }
 
 #team-name {
-  position: absolute;
   top: 35px;
   left: 8px;
+  font-size: 24px;
 }
 
 #user-name {
-  position: absolute;
   top: 59px;
   left: 60px;
-  font-size: 12px;
+  font-size: 14px;
+}
+
+.position, .player-name, .number, .bt {
+  position: absolute;
+  font-family: "M PLUS Rounded 1c";
+  font-size: 22px;
 }
 
 .position {
-  position: absolute;
   left: 68px;
 }
 
 .player-name {
-  position: absolute;
-  left: 170px;
+  left: 50%;
+  transform: translateX(-50%);
+  -webkit-transform: translateX(-50%);
+  -ms-transform: translateX(-50%);
 }
 
 .number {
-  position: absolute;
   left: 320px;
 }
 
 .bt {
-  position: absolute;
   left: 355px;
 }
 
@@ -208,20 +216,20 @@ export default {
         let positions = [];
         let players = [];
         this.selectPlayers.filter(e => {
-          if (e["position"].length > 0) {
-            if (positions.indexOf(e["position"]) === -1) {
-              positions.push(e["position"]);
-              e["duplicatedPosition"] = false;
+          if (e.position.length > 0) {
+            if (positions.indexOf(e.position) === -1) {
+              positions.push(e.position);
+              e.duplicatedPosition = false;
             }else{
-              e["duplicatedPosition"] = true;
+              e.duplicatedPosition = true;
             }
           }
-          if (e['player'] !== '') {
-            if (players.indexOf(e["player"]["name"]) === -1) {
-              players.push(e["player"]["name"]);
-              e["duplicatedPlayer"] = false;
+          if (e.player !== '') {
+            if (players.indexOf(e.player.name) === -1) {
+              players.push(e.player.name);
+              e.duplicatedPlayer = false;
             }else{
-              e["duplicatedPlayer"] = true;
+              e.duplicatedPlayer = true;
             }
           }
           return e;
