@@ -1,35 +1,49 @@
 <template>
-  <div id="app">
-    <h1>ぼく将おーだー2020（beta）</h1>
-    <h2>監督名を入れてね（任意）</h2>
-    <input v-model="userName">監督
+  <div id="app" class="container">
+    <h1 class="text-center">ぼく将おーだー2020（beta）</h1>
+    <hr class="pt-1 pb-2">
+    <h2 class="pb-2">監督名を入れてね（任意）</h2>
+    <div class="input-group">
+      <input class="form-control col-3" v-model="userName">
+      <div class="input-group-append"><span class="input-group-text">監督</span></div>
+    </div>
 
-    <h2>リーグを選んでね</h2>
-    <label><input type="radio" id="central" value="central" v-model="selectLeague" checked>セ・リーグ</label>
-    <label><input type="radio" id="pacific" value="pacific" v-model="selectLeague">パ・リーグ</label>
+    <h2 class="pt-4 pb-2">リーグを選んでね</h2>
+    <div class="form-check form-check-inline ">
+      <label class="form-check-label">
+        <input class="form-check-input" type="radio" id="central" value="central" v-model="selectLeague" checked>
+        <span class="leagu-name">セ・リーグ</span>
+      </label>
+    </div>
+    <div class="form-check form-check-inline">
+      <label class="form-check-label">
+        <input class="form-check-input" type="radio" id="pacific" value="pacific" v-model="selectLeague">
+        <span class="leagu-name">パ・リーグ</span>
+        </label>
+    </div>
 
-    <h2>球団を選んでね</h2>
-    <select v-model="selectTeam">
+    <h2 class="pt-4 pb-2">球団を選んでね</h2>
+    <select v-model="selectTeam" class="custom-select-lg col-4">
       <option disabled value="">球団を選択してください</option>
       <option v-for="(team, index) in npb[selectLeague]" :key="index" :value="team">{{ team.displayName }}</option>
     </select>
 
-    <h2>打順を組んでね</h2>
+    <h2 class="pt-4 pb-2">打順を組んでね</h2>
     <p>※重複するとその箇所が赤くなりますが、エラーにはなりません。</p>
     <ol>
       <li v-for="(selectPlayer, index) in selectPlayers" :key="index">
-        <select v-model="selectPlayer.position" :class="{ duplicated: selectPlayer.duplicatedPosition }">
-          <option disabled value="">ポジション</option>
+        <select class="custom-select col-1" v-model="selectPlayer.position" :class="{ duplicated: selectPlayer.duplicatedPosition }">
+          <option disabled value="">守備</option>
           <option v-for="(position, index) in positions" :key="index">{{ position }}</option>
         </select>
-        <select v-model="selectPlayer.player" :class="{ duplicated: selectPlayer.duplicatedPlayer }">
+        <select class="custom-select col-3" v-model="selectPlayer.player" :class="{ duplicated: selectPlayer.duplicatedPlayer }">
           <option disabled value="">選手</option>
           <option v-for="(player, index) in npbPlayers[selectTeam.jsonName]" :key="index" :value="player">{{ player.name }}</option>
         </select>
       </li>
     </ol>
-    <h3>プレビューだよ</h3>
-    <div id="preview">
+    <h4  class="pt-4 pb-2">プレビューだよ</h4>
+    <div id="preview" class="pb-4">
       <div id="preview-inner">
         <div id="team-name"> {{ selectTeam.displayName }} </div>
         <div id="user-name"> {{ userName }}</div>
@@ -41,15 +55,21 @@
         </div>
       </div>
     </div>
-    <button @click="generate">画像を生成する</button>
-    <p>↓ここに出ます↓</p>
+    <button class="btn-primary btn-lg" @click="generate">画像を生成する</button>
+    <hr class="pt-2 pb-2">
+    <h4 class="pb-2">ここの画像を保存してね</h4>
     <div id="result"></div>
+    <h4 class="pt-2 pb-2">ここからツイートしてね</h4>
   </div>
 </template>
 
 <style type="text/css">
 .duplicated {
   border: 2px dashed red;
+}
+
+.leagu-name {
+  font-size: 14pt;
 }
 
 #preview {
@@ -138,7 +158,7 @@ export default {
                           {'jsonName': 'buffaloes', 'displayName': 'オリックス・バファローズ', 'hashTag': '#Bs2020'}
                        ]
            },
-      selectTeam: {'jsonName': 'giants', 'displayName': '読売ジャイアンツ', 'hashTag': '#giants'},
+      selectTeam: '',
       npbPlayers: {'giants':giants, 'baystars': baystars, 'tigers': tigers, 'carp': carp, 'dragons': dragons, 'swallows': swallows,
                     'lions': lions, 'hawks': hawks, 'eagles':eagles, 'marines': marines, 'fighters': fighters, 'buffaloes': buffaloes},
       positions: ['投', '捕', '一', '二', '三', '遊', '左', '中', '右', 'Ｄ'],
