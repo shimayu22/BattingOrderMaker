@@ -1,6 +1,6 @@
 <template>
   <div id="app">
-    <h1>ぼくのかんがえたさいきょーのおーだー2020</h1>
+    <h1>ぼく将おーだー2020（beta）</h1>
     <h2>監督名を入れてね（任意）</h2>
     <input v-model="userName">監督
 
@@ -15,6 +15,7 @@
     </select>
 
     <h2>打順を組んでね</h2>
+    <p>※重複するとその箇所が赤くなりますが、エラーにはなりません。</p>
     <ol>
       <li v-for="(selectPlayer, index) in selectPlayers" :key="index">
         <select v-model="selectPlayer.position" :class="{ duplicated: selectPlayer.duplicatedPosition }">
@@ -27,42 +28,41 @@
         </select>
       </li>
     </ol>
-    <h3>プレビュー</h3>
+    <h3>プレビューだよ</h3>
     <div id="preview">
       <div id="preview-inner">
-        <div id="team-name"> {{ selectTeam['displayName'] }} </div>
+        <div id="team-name"> {{ selectTeam.displayName }} </div>
         <div id="user-name"> {{ userName }}</div>
-
-        <div id="position-1">{{ selectPlayers[0]['position'] }}</div>
-        <div id="player-name-1">{{ selectPlayers[0]['player']['name'] }}</div>
-        <div id="id-1">{{ selectPlayers[0]['player']['id'] }}</div>
-        <div id="bt-1">{{ selectPlayers[0]['player']['bt'] }}</div>
-
-
-
+        <div v-for="(player, index) in selectPlayers" :key="index">
+          <div class="position" :style="{ top: player.top }">{{ player['position'] }}</div>
+          <div class="player-name" :style="{ top: player.top }">{{ player.player.name }}</div>
+          <div class="number" :style="{ top: player.top }">{{ player.player.id }}</div>
+          <div class="bt" :style="{ top: player.top }">{{ player.player.bt }}</div>
+        </div>
       </div>
     </div>
     <button @click="generate">画像を生成する</button>
+    <p>↓ここに出ます↓</p>
     <div id="result"></div>
   </div>
 </template>
 
 <style type="text/css">
-#duplicated {
+.duplicated {
   border: 2px dashed red;
 }
 
 #preview {
   overflow: auto;
-  width: 400px;
+  width: 500px;
 }
 
 #preview-inner {
   background: url(/member.png) no-repeat left bottom;
-  background-size: 400px 400px;
+  background-size: 500px 500px;
   position: relative;
-  width: 400px;
-  height: 400px;
+  width: 500px;
+  height: 500px;
 }
 
 #team-name {
@@ -78,27 +78,23 @@
   font-size: 12px;
 }
 
-#position-1 {
+.position {
   position: absolute;
-  top: 107px;
   left: 68px;
 }
 
-#player-name-1 {
+.player-name {
   position: absolute;
-  top: 107px;
   left: 170px;
 }
 
-#id-1 {
+.number {
   position: absolute;
-  top: 107px;
   left: 320px;
 }
 
-#bt-1 {
+.bt {
   position: absolute;
-  top: 107px;
   left: 355px;
 }
 
@@ -147,21 +143,21 @@ export default {
                     'lions': lions, 'hawks': hawks, 'eagles':eagles, 'marines': marines, 'fighters': fighters, 'buffaloes': buffaloes},
       positions: ['投', '捕', '一', '二', '三', '遊', '左', '中', '右', 'Ｄ'],
       selectPlayers: [
-                        {'order': 1, 'position': '', 'player': '', 'duplicatedPosition': false, 'duplicatedPlayer': false},
-                        {'order': 2, 'position': '', 'player': '', 'duplicatedPosition': false, 'duplicatedPlayer': false},
-                        {'order': 3, 'position': '', 'player': '', 'duplicatedPosition': false, 'duplicatedPlayer': false},
-                        {'order': 4, 'position': '', 'player': '', 'duplicatedPosition': false, 'duplicatedPlayer': false},
-                        {'order': 5, 'position': '', 'player': '', 'duplicatedPosition': false, 'duplicatedPlayer': false},
-                        {'order': 6, 'position': '', 'player': '', 'duplicatedPosition': false, 'duplicatedPlayer': false},
-                        {'order': 7, 'position': '', 'player': '', 'duplicatedPosition': false, 'duplicatedPlayer': false},
-                        {'order': 8, 'position': '', 'player': '', 'duplicatedPosition': false, 'duplicatedPlayer': false},
-                        {'order': 9, 'position': '', 'player': '', 'duplicatedPosition': false, 'duplicatedPlayer': false}
-                     ]
+                        {'order': 1, 'position': '', 'player': '', 'duplicatedPosition': false, 'duplicatedPlayer': false, 'top': '100px'},
+                        {'order': 2, 'position': '', 'player': '', 'duplicatedPosition': false, 'duplicatedPlayer': false, 'top': '130px'},
+                        {'order': 3, 'position': '', 'player': '', 'duplicatedPosition': false, 'duplicatedPlayer': false, 'top': '160px'},
+                        {'order': 4, 'position': '', 'player': '', 'duplicatedPosition': false, 'duplicatedPlayer': false, 'top': '190px'},
+                        {'order': 5, 'position': '', 'player': '', 'duplicatedPosition': false, 'duplicatedPlayer': false, 'top': '220px'},
+                        {'order': 6, 'position': '', 'player': '', 'duplicatedPosition': false, 'duplicatedPlayer': false, 'top': '250px'},
+                        {'order': 7, 'position': '', 'player': '', 'duplicatedPosition': false, 'duplicatedPlayer': false, 'top': '280px'},
+                        {'order': 8, 'position': '', 'player': '', 'duplicatedPosition': false, 'duplicatedPlayer': false, 'top': '310px'},
+                        {'order': 9, 'position': '', 'player': '', 'duplicatedPosition': false, 'duplicatedPlayer': false, 'top': '340px'}
+                     ],
     }
   },
   methods: {
     generate() {
-      html2canvas(document.getElementById('preview-inner')).then(function(canvas){
+      html2canvas(document.getElementById('preview-inner'),{scale: 3,}).then(function(canvas){
         var result = document.getElementById('result');
         result.innerHTML = '';
         result.appendChild(canvas);
