@@ -4,7 +4,7 @@
     <hr class="pt-1 pb-2">
     <h2 class="pb-2">監督名を入れてね（任意）</h2>
     <div class="input-group">
-      <input class="form-control col" v-model="userName">
+      <input class="form-control col-2" v-model="userName">
       <div class="input-group-append"><span class="input-group-text">監督</span></div>
     </div>
 
@@ -23,7 +23,7 @@
     </div>
 
     <h2 class="pt-4 pb-2">球団を選んでね</h2>
-    <select v-model="selectTeam" class="custom-select-lg col">
+    <select v-model="selectTeam" class="custom-select-lg col-6">
       <option disabled value="">球団を選択してください</option>
       <option v-for="(team, index) in npb[selectLeague]" :key="index" :value="team">{{ team.displayName }}</option>
     </select>
@@ -32,11 +32,11 @@
     <p>※重複するとその箇所が赤くなりますが、エラーにはなりません。</p>
     <ol>
       <li v-for="(selectPlayer, index) in selectPlayers" :key="index">
-        <select class="custom-select col" v-model="selectPlayer.position" :class="{ duplicated: selectPlayer.duplicatedPosition }">
+        <select class="custom-select col-3" v-model="selectPlayer.position" :class="{ duplicated: selectPlayer.duplicatedPosition }">
           <option disabled value="">守備</option>
           <option v-for="(position, index) in positions" :key="index">{{ position }}</option>
         </select>
-        <select class="custom-select col" v-model="selectPlayer.player" :class="{ duplicated: selectPlayer.duplicatedPlayer }">
+        <select class="custom-select col-7" v-model="selectPlayer.player" :class="{ duplicated: selectPlayer.duplicatedPlayer }">
           <option disabled value="">選手</option>
           <option v-for="(player, index) in npbPlayers[selectTeam.jsonName]" :key="index" :value="player">{{ player.name }}</option>
         </select>
