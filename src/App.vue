@@ -57,8 +57,8 @@
     </div>
     <button class="btn-primary btn-lg" @click="generate">画像を生成</button>
     <hr>
-    <img src="/member.png" id="result"><p></p>
-    <button class="btn-primary btn-lg" @click="generate">画像をダウンロード</button>
+    <p id="result"></p>
+    <button class="btn-primary btn-lg" @click="download">画像をダウンロード(PC用)</button>
     <h4 class="pt-2 pb-2">ここからツイートしてね</h4>
   </div>
 </template>
@@ -70,11 +70,6 @@
 
 .leagu-name {
   font-size: 14pt;
-}
-
-#result {
-  width: 500px;
-  height: 500px;
 }
 
 #preview {
@@ -184,7 +179,14 @@ export default {
     generate() {
       html2canvas(document.getElementById('preview-inner')).then(
         function(canvas){
-          document.getElementById("result").src = canvas.toDataURL('image/png');
+          let img = document.createElement("img");
+          img.src = canvas.toDataURL('image/png');
+          img.width = "500";
+          img.height = "500";
+          
+          let parentElement = document.getElementById("result").parentNode;
+          let p = document.getElementById("result");
+          parentElement.insertBefore(img, p);
         }
       )
     },
