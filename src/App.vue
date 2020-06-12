@@ -83,6 +83,7 @@
   position: relative;
   width: 500px;
   height: 500px;
+  font-family: "M PLUS Rounded 1c";
 }
 
 #team-name {
