@@ -48,7 +48,7 @@
         <div id="team-name"> {{ selectTeam.displayName }} </div>
         <div id="user-name"> {{ userName }}</div>
         <div v-for="(player, index) in selectPlayers" :key="index">
-          <div class="position" :style="{ top: player.top }">{{ player.position }}</div>
+          <div class="position" :style="(player.position === 'DH') ? { top: player.top, left: '86px' }:{ top: player.top }">{{ player.position }}</div>
           <div class="player-name" :style="{ top: player.top }">{{ player.player.name }}</div>
           <div class="number" :style="{ top: player.top, left: player.player.left }">{{ player.player.id }}</div>
           <div class="bt" :style="{ top: player.top }">{{ player.player.bt }}</div>
