@@ -1,0 +1,62 @@
+.duplicated {
+  border: 2px dashed red;
+}
+
+.leagu-name {
+  font-size: 14pt;
+}
+
+#preview {
+  overflow: auto;
+  width: 500px;
+}
+
+#preview-inner {
+  background: url(/member.png) no-repeat left bottom;
+  background-size: 500px 500px;
+  position: relative;
+  width: 500px;
+  height: 500px;
+}
+
+#team-name, #user-name {
+  position: absolute;
+  font-family: "M PLUS Rounded 1c";
+}
+
+#team-name {
+  top: 35px;
+  left: 8px;
+  font-size: 24px;
+}
+
+#user-name {
+  top: 59px;
+  left: 60px;
+  font-size: 14px;
+}
+
+.position, .player-name, .number, .bt {
+  position: absolute;
+  font-family: "M PLUS Rounded 1c";
+  font-size: 22px;
+}
+
+.position {
+  left: 90px;
+}
+
+.player-name {
+  left: 50%;
+  transform: translateX(-50%);
+  -webkit-transform: translateX(-50%);
+  -ms-transform: translateX(-50%);
+}
+
+.number {
+  left: 370px;
+}
+
+.bt {
+  left: 400px;
+}

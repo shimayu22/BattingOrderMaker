@@ -12,3 +12,5 @@ yarn-error.log
 *.sln
 
 !dist/index.html
+!dist/member.png
+!dist/style.css
