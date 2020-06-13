@@ -120,12 +120,17 @@ export default {
   },
   methods: {
     generate() {
+      if (!!document.getElementById("resultImg")) {
+            let resultImg = document.getElementById("resultImg");
+            resultImg.remove();
+      }
       html2canvas(document.getElementById('preview-inner')).then(
         function(canvas){
           let img = document.createElement("img");
           img.src = canvas.toDataURL('image/png');
           img.width = "500";
           img.height = "500";
+          img.id = "resultImg";
           
           let parentElement = document.getElementById("result").parentNode;
           let p = document.getElementById("result");
