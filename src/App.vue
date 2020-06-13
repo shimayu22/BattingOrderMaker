@@ -50,7 +50,7 @@
         <div v-for="(player, index) in selectPlayers" :key="index">
           <div class="position" :style="{ top: player.top }">{{ player.position }}</div>
           <div class="player-name" :style="{ top: player.top }">{{ player.player.name }}</div>
-          <div class="number" :style="{ top: player.top }">{{ player.player.id }}</div>
+          <div class="number" :style="{ top: player.top, left:player.left }">{{ player.player.id }}</div>
           <div class="bt" :style="{ top: player.top }">{{ player.player.bt }}</div>
         </div>
       </div>
@@ -119,15 +119,15 @@ export default {
       //                   {'order': 9, 'position': '', 'player': '', 'duplicatedPosition': false, 'duplicatedPlayer': false, 'top': '453px'}
       //                ]
       selectPlayers: [
-                        {'order': 1, 'position': '中', 'player': {"id": "7", "name": "西川遥輝", "bt": "右左"}, 'duplicatedPosition': false, 'duplicatedPlayer': false, 'top': '135px'},
-                        {'order': 2, 'position': '右', 'player': {"id": "5", "name": "大田泰示", "bt": "右右"}, 'duplicatedPosition': false, 'duplicatedPlayer': false, 'top': '175px'},
-                        {'order': 3, 'position': 'DH', 'player': {"id": "8", "name": "近藤健介", "bt": "右左"}, 'duplicatedPosition': false, 'duplicatedPlayer': false, 'top': '213px'},
-                        {'order': 4, 'position': '一', 'player': {"id": "6", "name": "中田翔", "bt": "右右"}, 'duplicatedPosition': false, 'duplicatedPlayer': false, 'top': '253px'},
-                        {'order': 5, 'position': '左', 'player': {"id": "3", "name": "王柏融", "bt": "右左"}, 'duplicatedPosition': false, 'duplicatedPlayer': false, 'top': '293px'},
-                        {'order': 6, 'position': '二', 'player': {"id": "23", "name": "渡邉諒", "bt": "右右"}, 'duplicatedPosition': false, 'duplicatedPlayer': false, 'top': '333px'},
-                        {'order': 7, 'position': '三', 'player': {"id": "24", "name": "野村佑希", "bt": "右右"}, 'duplicatedPosition': false, 'duplicatedPlayer': false, 'top': '373px'},
-                        {'order': 8, 'position': '捕', 'player': {"id": "10", "name": "清水優心", "bt": "右右"}, 'duplicatedPosition': false, 'duplicatedPlayer': false, 'top': '413px'},
-                        {'order': 9, 'position': '遊', 'player': {"id": "9", "name": "中島卓也", "bt": "右左"}, 'duplicatedPosition': false, 'duplicatedPlayer': false, 'top': '453px'}
+                        {'order': 1, 'position': '中', 'player': {"id": "107", "name": "西川遥輝", "bt": "右左"}, 'duplicatedPosition': false, 'duplicatedPlayer': false, 'top': '135px', 'left': '377px'},
+                        {'order': 2, 'position': '右', 'player': {"id": "5", "name": "大田泰示", "bt": "右右"}, 'duplicatedPosition': false, 'duplicatedPlayer': false, 'top': '175px', 'left': '393px'},
+                        {'order': 3, 'position': 'DH', 'player': {"id": "8", "name": "近藤健介", "bt": "右左"}, 'duplicatedPosition': false, 'duplicatedPlayer': false, 'top': '213px', 'left': '393px'},
+                        {'order': 4, 'position': '一', 'player': {"id": "6", "name": "中田翔", "bt": "右右"}, 'duplicatedPosition': false, 'duplicatedPlayer': false, 'top': '253px', 'left': '393px'},
+                        {'order': 5, 'position': '左', 'player': {"id": "3", "name": "王柏融", "bt": "右左"}, 'duplicatedPosition': false, 'duplicatedPlayer': false, 'top': '293px', 'left': '393px'},
+                        {'order': 6, 'position': '二', 'player': {"id": "23", "name": "渡邉諒", "bt": "右右"}, 'duplicatedPosition': false, 'duplicatedPlayer': false, 'top': '333px', 'left': '385px'},
+                        {'order': 7, 'position': '三', 'player': {"id": "24", "name": "野村佑希", "bt": "右右"}, 'duplicatedPosition': false, 'duplicatedPlayer': false, 'top': '373px', 'left': '385px'},
+                        {'order': 8, 'position': '捕', 'player': {"id": "10", "name": "清水優心", "bt": "右右"}, 'duplicatedPosition': false, 'duplicatedPlayer': false, 'top': '413px', 'left': '385px'},
+                        {'order': 9, 'position': '遊', 'player': {"id": "9", "name": "中島卓也", "bt": "右左"}, 'duplicatedPosition': false, 'duplicatedPlayer': false, 'top': '453px', 'left': '393px'}
                      ]
 
     }
