@@ -25,15 +25,15 @@
 }
 
 #team-name {
-  top: 35px;
-  left: 8px;
+  top: 45px;
+  left: 19px;
   font-size: 24px;
 }
 
 #user-name {
-  top: 59px;
-  left: 60px;
-  font-size: 14px;
+  top: 82px;
+  left: 84px;
+  font-size: 15px;
 }
 
 .position, .player-name, .number, .bt {
