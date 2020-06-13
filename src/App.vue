@@ -50,7 +50,7 @@
         <div v-for="(player, index) in selectPlayers" :key="index">
           <div class="position" :style="{ top: player.top }">{{ player.position }}</div>
           <div class="player-name" :style="{ top: player.top }">{{ player.player.name }}</div>
-          <div class="number" :style="{ top: player.top, left:player.player.left }">{{ player.player.id }}</div>
+          <div class="number" :style="{ top: player.top, left: player.player.left }">{{ player.player.id }}</div>
           <div class="bt" :style="{ top: player.top }">{{ player.player.bt }}</div>
         </div>
       </div>
@@ -108,10 +108,10 @@ export default {
       selectPlayers: [
                         {'order': 1, 'position': '', 'player': '', 'duplicatedPosition': false, 'duplicatedPlayer': false, 'top': '135px'},
                         {'order': 2, 'position': '', 'player': '', 'duplicatedPosition': false, 'duplicatedPlayer': false, 'top': '175px'},
-                        {'order': 3, 'position': '', 'player': '', 'duplicatedPosition': false, 'duplicatedPlayer': false, 'top': '213px'},
-                        {'order': 4, 'position': '', 'player': '', 'duplicatedPosition': false, 'duplicatedPlayer': false, 'top': '253px'},
-                        {'order': 5, 'position': '', 'player': '', 'duplicatedPosition': false, 'duplicatedPlayer': false, 'top': '293px'},
-                        {'order': 6, 'position': '', 'player': '', 'duplicatedPosition': false, 'duplicatedPlayer': false, 'top': '333px'},
+                        {'order': 3, 'position': '', 'player': '', 'duplicatedPosition': false, 'duplicatedPlayer': false, 'top': '214px'},
+                        {'order': 4, 'position': '', 'player': '', 'duplicatedPosition': false, 'duplicatedPlayer': false, 'top': '254px'},
+                        {'order': 5, 'position': '', 'player': '', 'duplicatedPosition': false, 'duplicatedPlayer': false, 'top': '294px'},
+                        {'order': 6, 'position': '', 'player': '', 'duplicatedPosition': false, 'duplicatedPlayer': false, 'top': '334px'},
                         {'order': 7, 'position': '', 'player': '', 'duplicatedPosition': false, 'duplicatedPlayer': false, 'top': '373px'},
                         {'order': 8, 'position': '', 'player': '', 'duplicatedPosition': false, 'duplicatedPlayer': false, 'top': '413px'},
                         {'order': 9, 'position': '', 'player': '', 'duplicatedPosition': false, 'duplicatedPlayer': false, 'top': '453px'}

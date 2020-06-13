@@ -21,7 +21,6 @@
 
 #team-name, #user-name {
   position: absolute;
-  font-family: "M PLUS Rounded 1c";
 }
 
 #team-name {
@@ -31,14 +30,13 @@
 }
 
 #user-name {
-  top: 82px;
+  top: 80px;
   left: 84px;
   font-size: 15px;
 }
 
 .position, .player-name, .number, .bt {
   position: absolute;
-  font-family: "M PLUS Rounded 1c";
   font-size: 22px;
 }
 
@@ -54,7 +52,7 @@
 }
 
 .number {
-  left: 377px;
+  left: 376px;
 }
 
 .bt {
