@@ -1,6 +1,6 @@
 <template>
   <div id="app" class="container">
-    <h1 class="text-center">ぼく将おーだー2020（beta）</h1>
+    <h1 class="text-center">打順メーカー2020（beta）</h1>
     <hr class="pt-1 pb-2">
     <h2 class="pb-2">監督名を入れてね（任意）</h2>
     <div class="input-group">
@@ -60,6 +60,7 @@
     <p id="result"></p>
     <button class="btn-primary btn-lg" @click="download">画像をダウンロード(PC用)</button>
     <h4 class="pt-2 pb-2">ここからツイートしてね</h4>
+    <button class="btn-primary btn-lg" @click="twitterShare">オーダーをツイートする</button>
   </div>
 </template>
 
@@ -85,20 +86,20 @@ export default {
       userName: '名無しさん',
       selectLeague: 'central',
       npb: {'central': [
-                          {'jsonName': 'giants', 'displayName': '読売ジャイアンツ', 'hashTag': '#giants'},
-                          {'jsonName': 'baystars', 'displayName': '横浜DeNAベイスターズ', 'hashTag': '#baystars'},
-                          {'jsonName': 'tigers', 'displayName': '阪神タイガース', 'hashTag': '#tigers'},
-                          {'jsonName': 'carp', 'displayName': '広島東洋カープ', 'hashTag': '#carp'},
-                          {'jsonName': 'dragons', 'displayName': '中日ドラゴンズ', 'hashTag': '#dragons'},
-                          {'jsonName': 'swallows', 'displayName': '東京ヤクルトスワローズ', 'hashTag': '#swallows'}
+                          {'jsonName': 'giants', 'displayName': '読売ジャイアンツ', 'hashTag': 'giants'},
+                          {'jsonName': 'baystars', 'displayName': '横浜DeNAベイスターズ', 'hashTag': 'baystars'},
+                          {'jsonName': 'tigers', 'displayName': '阪神タイガース', 'hashTag': 'tigers'},
+                          {'jsonName': 'carp', 'displayName': '広島東洋カープ', 'hashTag': 'carp'},
+                          {'jsonName': 'dragons', 'displayName': '中日ドラゴンズ', 'hashTag': 'dragons'},
+                          {'jsonName': 'swallows', 'displayName': '東京ヤクルトスワローズ', 'hashTag': 'swallows'}
                        ],
             'pacific': [
-                          {'jsonName': 'lions', 'displayName': '埼玉西武ライオンズ', 'hashTag': '#seibulions'}, 
-                          {'jsonName': 'hawks', 'displayName': '福岡ソフトバンクホークス', 'hashTag': '#sbhawks'},
-                          {'jsonName': 'eagles', 'displayName': '東北楽天ゴールデンイーグルス', 'hashTag': '#RakutenEagles'},
-                          {'jsonName': 'marines', 'displayName': '千葉ロッテマリーンズ', 'hashTag': '#chibalotte'},
-                          {'jsonName': 'fighters', 'displayName': '北海道日本ハムファイターズ', 'hashTag': '#lovefighters'},
-                          {'jsonName': 'buffaloes', 'displayName': 'オリックス・バファローズ', 'hashTag': '#Bs2020'}
+                          {'jsonName': 'lions', 'displayName': '埼玉西武ライオンズ', 'hashTag': 'seibulions'}, 
+                          {'jsonName': 'hawks', 'displayName': '福岡ソフトバンクホークス', 'hashTag': 'sbhawks'},
+                          {'jsonName': 'eagles', 'displayName': '東北楽天ゴールデンイーグルス', 'hashTag': 'RakutenEagles'},
+                          {'jsonName': 'marines', 'displayName': '千葉ロッテマリーンズ', 'hashTag': 'chibalotte'},
+                          {'jsonName': 'fighters', 'displayName': '北海道日本ハムファイターズ', 'hashTag': 'lovefighters'},
+                          {'jsonName': 'buffaloes', 'displayName': 'オリックス・バファローズ', 'hashTag': 'Bs2020'}
                        ]
            },
       selectTeam: '',
@@ -147,6 +148,10 @@ export default {
           link.click();
         }
       )
+    },
+    twitterShare() {
+      let shareURL = 'https://twitter.com/intent/tweet?text=' + "ぼくのかんがえた" + this.selectTeam.displayName + "のオーダー" + "%20%23野球 %20%23ぼくのオーダー %20%23" + this.selectTeam.hashTag + '&url=' + "https://battingordermaker.web.app/";
+      location.href = shareURL
     }
   },
   watch: {
