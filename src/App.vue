@@ -67,18 +67,22 @@
             </div>
           </div>
         </div>
-        <button class="btn-primary btn-lg" @click="generate">画像を生成</button>
       </div>
     </div>
+    <div class="text-center">
+      <button class="btn-primary btn-lg col-6" @click="generate">画像を生成</button>
+    </div>
     <hr>
+    <p class="text-center">↓ここに表示される画像を右クリック or 長押しで保存してください</p>
     <div class="text-center">
       <p id="result"></p>
     </div>
-    <p class="text-center">右クリック or 長押しで画像を保存してください</p>
     <!-- <button class="btn-primary btn-lg" @click="download">画像をダウンロード(PC用)</button> -->
     <hr>
-    <h4 class="pt-2 pb-2 text-center">ここからツイートしてね</h4>
-    <button class="btn-primary btn-lg col" @click="twitterShare">オーダーをツイートする</button>
+    <div class=" text-center">
+      <h4 class="pt-2 pb-2">ここからツイートしてね</h4>
+      <button class="btn-primary btn-lg col-6" @click="twitterShare">オーダーをツイートする</button>
+    </div>
   </div>
 </template>
 
