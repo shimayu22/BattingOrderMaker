@@ -1,58 +1,55 @@
 <template>
   <div id="app">
-    <h2 class="pb-2 text-center">監督名を入れてね（任意）</h2>
+
+  <div class="text-center">
     <div class="row justify-content-center">
       <div>
+        <h2 class="pb-2">監督名を入れてね（任意）</h2>
         <div class="input-group">
-          <input class="form-control col" v-model="userName">
+          <input class="form-control" v-model="userName">
           <div class="input-group-append"><span class="input-group-text">監督</span></div>
         </div>
       </div>
     </div>
 
-    <h2 class="pt-4 pb-2 text-center">リーグを選んでね</h2>
-    <div class="row justify-content-center">
-      <div>
-        <div class="form-check form-check-inline">
-          <label class="form-check-label">
-            <input class="form-check-input" type="radio" id="central" value="central" v-model="selectLeague" checked>
-            <span class="leagu-name">セ・リーグ</span>
-          </label>
-        </div>
-        <div class="form-check form-check-inline">
-          <label class="form-check-label">
-            <input class="form-check-input" type="radio" id="pacific" value="pacific" v-model="selectLeague">
-            <span class="leagu-name">パ・リーグ</span>
-            </label>
-        </div>
-      </div>
+    <h2 class="pt-4 pb-2">リーグを選んでね</h2>
+    <div class="form-check form-check-inline">
+      <label class="form-check-label">
+        <input class="form-check-input" type="radio" id="central" value="central" v-model="selectLeague" checked>
+        <span class="leagu-name">セ・リーグ</span>
+      </label>
+    </div>
+    <div class="form-check form-check-inline">
+      <label class="form-check-label">
+        <input class="form-check-input" type="radio" id="pacific" value="pacific" v-model="selectLeague">
+        <span class="leagu-name">パ・リーグ</span>
+        </label>
     </div>
 
-    <h2 class="pt-4 pb-2 text-center">球団を選んでね</h2>
-    <select v-model="selectTeam" class="custom-select-lg form-control">
-      <option disabled value="">球団を選択してください</option>
+    <h2 class="pt-4 pb-2">球団を選んでね</h2>
+    <select v-model="selectTeam" class="custom-select-lg col-4">
+      <option disabled value="" class="text-center">球団を選択してください</option>
       <option v-for="(team, index) in npb[selectLeague]" :key="index" :value="team">{{ team.displayName }}</option>
     </select>
 
-    <h2 class="pt-4 pb-2 text-center">打順を組んでね</h2>
-    <p class="text-center">※重複するとその箇所が赤くなりますが、エラーにはなりません。</p>
-    <div class="col border border-primary">
-      <ol>
-        <li v-for="(selectPlayer, index) in selectPlayers" :key="index" class="mt-2">
-          <select class="custom-select col-2" v-model="selectPlayer.position" :class="{ duplicated: selectPlayer.duplicatedPosition }">
-            <option disabled value="">守備</option>
-            <option v-for="(position, index) in positions" :key="index">{{ position }}</option>
-          </select>
-          　
-          <select class="custom-select col-9" v-model="selectPlayer.player" :class="{ duplicated: selectPlayer.duplicatedPlayer }">
-            <option disabled value="">選手</option>
-            <option v-for="(player, index) in npbPlayers[selectTeam.jsonName]" :key="index" :value="player">{{ player.name }}</option>
-          </select>
-        </li>
-      </ol>
+    <h2 class="pt-4 pb-2">打順を組んでね</h2>
+    <p>※重複するとその箇所が赤くなりますが、エラーにはなりません。</p>
+    <div>
+      <div v-for="(selectPlayer, index) in selectPlayers" :key="index" class="mt-2">
+        {{ index + 1 }}　：　
+        <select class="custom-select col-1" v-model="selectPlayer.position" :class="{ duplicated: selectPlayer.duplicatedPosition }">
+          <option disabled value="">守備</option>
+          <option v-for="(position, index) in positions" :key="index">{{ position }}</option>
+        </select>
+        　
+        <select class="custom-select col-4" v-model="selectPlayer.player" :class="{ duplicated: selectPlayer.duplicatedPlayer }">
+          <option disabled value="">選手</option>
+          <option v-for="(player, index) in npbPlayers[selectTeam.jsonName]" :key="index" :value="player">{{ player.name }}</option>
+        </select>
+      </div>
     </div>
 
-    <h4  class="pt-4 pb-2 text-center">プレビューだよ</h4>
+    <h4  class="pt-4 pb-2">プレビューだよ</h4>
     <div class="row justify-content-center">
       <div>
         <div id="preview" class="pb-4">
@@ -69,20 +66,16 @@
         </div>
       </div>
     </div>
-    <div class="text-center">
-      <button class="btn-primary btn-lg col-6" @click="generate">画像を生成</button>
-    </div>
+    <button class="btn-primary btn-lg col-6" @click="generate">画像を生成</button>
     <hr>
-    <p class="text-center">↓ここに表示される画像を右クリック or 長押しで保存してください</p>
-    <div class="text-center">
-      <p id="result"></p>
-    </div>
+    <p>↓ここに表示される画像を右クリック or 長押しで保存してください</p>
+    <p id="result"></p>
     <!-- <button class="btn-primary btn-lg" @click="download">画像をダウンロード(PC用)</button> -->
     <hr>
-    <div class=" text-center">
-      <h4 class="pt-2 pb-2">ここからツイートしてね</h4>
-      <button class="btn-primary btn-lg col-6" @click="twitterShare">オーダーをツイートする</button>
-    </div>
+
+    <h4 class="pt-2 pb-2">ここからツイートしてね</h4>
+    <button class="btn-primary btn-lg col-6" @click="twitterShare">オーダーをツイートする</button>
+
   </div>
 </template>
 
