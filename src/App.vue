@@ -1,66 +1,84 @@
 <template>
-  <div id="app" class="container">
-    <h1 class="text-center">打順メーカー2020（beta）</h1>
-    <hr class="pt-1 pb-2">
-    <h2 class="pb-2">監督名を入れてね（任意）</h2>
-    <div class="input-group">
-      <input class="form-control col-2" v-model="userName">
-      <div class="input-group-append"><span class="input-group-text">監督</span></div>
+  <div id="app">
+    <h2 class="pb-2 text-center">監督名を入れてね（任意）</h2>
+    <div class="row justify-content-center">
+      <div>
+        <div class="input-group">
+          <input class="form-control col" v-model="userName">
+          <div class="input-group-append"><span class="input-group-text">監督</span></div>
+        </div>
+      </div>
     </div>
 
-    <h2 class="pt-4 pb-2">リーグを選んでね</h2>
-    <div class="form-check form-check-inline ">
-      <label class="form-check-label">
-        <input class="form-check-input" type="radio" id="central" value="central" v-model="selectLeague" checked>
-        <span class="leagu-name">セ・リーグ</span>
-      </label>
-    </div>
-    <div class="form-check form-check-inline">
-      <label class="form-check-label">
-        <input class="form-check-input" type="radio" id="pacific" value="pacific" v-model="selectLeague">
-        <span class="leagu-name">パ・リーグ</span>
-        </label>
+    <h2 class="pt-4 pb-2 text-center">リーグを選んでね</h2>
+    <div class="row justify-content-center">
+      <div>
+        <div class="form-check form-check-inline">
+          <label class="form-check-label">
+            <input class="form-check-input" type="radio" id="central" value="central" v-model="selectLeague" checked>
+            <span class="leagu-name">セ・リーグ</span>
+          </label>
+        </div>
+        <div class="form-check form-check-inline">
+          <label class="form-check-label">
+            <input class="form-check-input" type="radio" id="pacific" value="pacific" v-model="selectLeague">
+            <span class="leagu-name">パ・リーグ</span>
+            </label>
+        </div>
+      </div>
     </div>
 
-    <h2 class="pt-4 pb-2">球団を選んでね</h2>
-    <select v-model="selectTeam" class="custom-select-lg col-6">
+    <h2 class="pt-4 pb-2 text-center">球団を選んでね</h2>
+    <select v-model="selectTeam" class="custom-select-lg form-control">
       <option disabled value="">球団を選択してください</option>
       <option v-for="(team, index) in npb[selectLeague]" :key="index" :value="team">{{ team.displayName }}</option>
     </select>
 
-    <h2 class="pt-4 pb-2">打順を組んでね</h2>
-    <p>※重複するとその箇所が赤くなりますが、エラーにはなりません。</p>
-    <ol>
-      <li v-for="(selectPlayer, index) in selectPlayers" :key="index">
-        <select class="custom-select col-3" v-model="selectPlayer.position" :class="{ duplicated: selectPlayer.duplicatedPosition }">
-          <option disabled value="">守備</option>
-          <option v-for="(position, index) in positions" :key="index">{{ position }}</option>
-        </select>
-        <select class="custom-select col-7" v-model="selectPlayer.player" :class="{ duplicated: selectPlayer.duplicatedPlayer }">
-          <option disabled value="">選手</option>
-          <option v-for="(player, index) in npbPlayers[selectTeam.jsonName]" :key="index" :value="player">{{ player.name }}</option>
-        </select>
-      </li>
-    </ol>
-    <h4  class="pt-4 pb-2">プレビューだよ</h4>
-    <div id="preview" class="pb-4">
-      <div id="preview-inner">
-        <div id="team-name"> {{ selectTeam.displayName }} </div>
-        <div id="user-name"> {{ userName }}</div>
-        <div v-for="(player, index) in selectPlayers" :key="index">
-          <div class="position" :style="(player.position === 'DH') ? { top: player.top, left: '86px' }:{ top: player.top }">{{ player.position }}</div>
-          <div class="player-name" :style="{ top: player.top }">{{ player.player.name }}</div>
-          <div class="number" :style="{ top: player.top, left: player.player.left }">{{ player.player.id }}</div>
-          <div class="bt" :style="{ top: player.top }">{{ player.player.bt }}</div>
+    <h2 class="pt-4 pb-2 text-center">打順を組んでね</h2>
+    <p class="text-center">※重複するとその箇所が赤くなりますが、エラーにはなりません。</p>
+    <div class="col border border-primary">
+      <ol>
+        <li v-for="(selectPlayer, index) in selectPlayers" :key="index" class="mt-2">
+          <select class="custom-select col-2" v-model="selectPlayer.position" :class="{ duplicated: selectPlayer.duplicatedPosition }">
+            <option disabled value="">守備</option>
+            <option v-for="(position, index) in positions" :key="index">{{ position }}</option>
+          </select>
+          　
+          <select class="custom-select col-9" v-model="selectPlayer.player" :class="{ duplicated: selectPlayer.duplicatedPlayer }">
+            <option disabled value="">選手</option>
+            <option v-for="(player, index) in npbPlayers[selectTeam.jsonName]" :key="index" :value="player">{{ player.name }}</option>
+          </select>
+        </li>
+      </ol>
+    </div>
+
+    <h4  class="pt-4 pb-2 text-center">プレビューだよ</h4>
+    <div class="row justify-content-center">
+      <div>
+        <div id="preview" class="pb-4">
+          <div id="preview-inner">
+            <div id="team-name"> {{ selectTeam.displayName }} </div>
+            <div id="user-name"> {{ userName }}</div>
+            <div v-for="(player, index) in selectPlayers" :key="index">
+              <div class="position" :style="(player.position === 'DH') ? { top: player.top, left: '86px' }:{ top: player.top }">{{ player.position }}</div>
+              <div class="player-name" :style="{ top: player.top }">{{ player.player.name }}</div>
+              <div class="number" :style="{ top: player.top, left: player.player.left }">{{ player.player.id }}</div>
+              <div class="bt" :style="{ top: player.top }">{{ player.player.bt }}</div>
+            </div>
+          </div>
         </div>
+        <button class="btn-primary btn-lg" @click="generate">画像を生成</button>
       </div>
     </div>
-    <button class="btn-primary btn-lg" @click="generate">画像を生成</button>
     <hr>
-    <p id="result"></p>
-    <button class="btn-primary btn-lg" @click="download">画像をダウンロード(PC用)</button>
-    <h4 class="pt-2 pb-2">ここからツイートしてね</h4>
-    <button class="btn-primary btn-lg" @click="twitterShare">オーダーをツイートする</button>
+    <div class="text-center">
+      <p id="result"></p>
+    </div>
+    <p class="text-center">右クリック or 長押しで画像を保存してください</p>
+    <!-- <button class="btn-primary btn-lg" @click="download">画像をダウンロード(PC用)</button> -->
+    <hr>
+    <h4 class="pt-2 pb-2 text-center">ここからツイートしてね</h4>
+    <button class="btn-primary btn-lg col" @click="twitterShare">オーダーをツイートする</button>
   </div>
 </template>
 
@@ -180,8 +198,29 @@ export default {
         });
       },
       deep: true
+    },
+    selectLeague: {
+      handler: function() {
+        this.selectTeam = '';
+      }
+    },
+    selectTeam: {
+      handler: function() {
+        this.selectPlayers = [
+                        {'order': 1, 'position': '', 'player': '', 'duplicatedPosition': false, 'duplicatedPlayer': false, 'top': '135px'},
+                        {'order': 2, 'position': '', 'player': '', 'duplicatedPosition': false, 'duplicatedPlayer': false, 'top': '175px'},
+                        {'order': 3, 'position': '', 'player': '', 'duplicatedPosition': false, 'duplicatedPlayer': false, 'top': '214px'},
+                        {'order': 4, 'position': '', 'player': '', 'duplicatedPosition': false, 'duplicatedPlayer': false, 'top': '254px'},
+                        {'order': 5, 'position': '', 'player': '', 'duplicatedPosition': false, 'duplicatedPlayer': false, 'top': '294px'},
+                        {'order': 6, 'position': '', 'player': '', 'duplicatedPosition': false, 'duplicatedPlayer': false, 'top': '334px'},
+                        {'order': 7, 'position': '', 'player': '', 'duplicatedPosition': false, 'duplicatedPlayer': false, 'top': '373px'},
+                        {'order': 8, 'position': '', 'player': '', 'duplicatedPosition': false, 'duplicatedPlayer': false, 'top': '413px'},
+                        {'order': 9, 'position': '', 'player': '', 'duplicatedPosition': false, 'duplicatedPlayer': false, 'top': '453px'}
+                     ];
+      }
     }
   }
 }
+
 </script>
 
