@@ -5,7 +5,7 @@
         <div>
           <h2 class="pb-2">監督名を入れてね（任意）</h2>
           <div class="input-group">
-            <input class="form-control" v-model="userName">
+            <input class="form-control" placeholder="ななしさん" v-model="userName">
             <div class="input-group-append"><span class="input-group-text">監督</span></div>
           </div>
         </div>
@@ -54,7 +54,7 @@
           <div id="preview" class="pb-4">
             <div id="preview-inner">
               <div id="team-name"> {{ selectTeam.displayName }} </div>
-              <div id="user-name"> {{ userName }}</div>
+              <div id="user-name"> {{ !!userName ? userName : 'ななしさん' }}</div>
               <div v-for="(player, index) in selectPlayers" :key="index">
                 <div class="position" :style="(player.position === 'DH') ? { top: player.top, left: '86px' }:{ top: player.top }">{{ player.position }}</div>
                 <div class="player-name" :style="{ top: player.top }">{{ player.player.name }}</div>
@@ -98,7 +98,7 @@ export default {
   name: 'app',
   data () {
     return {
-      userName: '名無しさん',
+      userName: '',
       selectLeague: 'central',
       npb: {'central': [
                           {'jsonName': 'giants', 'displayName': '読売ジャイアンツ', 'hashTag': 'giants'},
