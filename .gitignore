@@ -16,3 +16,4 @@ yarn-error.log
 !dist/style.css
 !dist/favicon.ico
 !dist/ogp.png
+!dist/bootstrap-social.css

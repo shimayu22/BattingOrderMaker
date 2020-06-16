@@ -66,7 +66,7 @@
           </div>
         </div>
       </div>
-      <button class="btn-primary btn-lg col-6" @click="generate">画像を生成</button>
+      <button class="btn-primary btn-lg col-4" @click="generate">画像を生成する</button>
       <hr>
       <p>↓ここに表示される画像を右クリック or 長押しで保存してください</p>
       <p id="result"></p>
@@ -74,7 +74,9 @@
       <hr>
 
       <h4 class="pt-2 pb-2">ここからツイートしてね</h4>
-      <button class="btn-primary btn-lg col-6" @click="twitterShare">オーダーをツイートする</button>
+      <div class="row justify-content-center">
+        <button class="btn btn-block btn-social btn-twitter btn-lg col-4" @click="twitterShare"><i class="fa fa-twitter"></i>　　オーダーをツイートする</button>
+      </div>
 
     </div>
   </div>
@@ -168,7 +170,10 @@ export default {
     },
     twitterShare() {
       let shareURL = 'https://twitter.com/intent/tweet?text=' + "ぼくのかんがえた" + this.selectTeam.displayName + "のオーダー" + "%20%23野球 %20%23ぼく将オーダー %20%23" + this.selectTeam.hashTag + '&url=' + "https://battingordermaker.web.app/";
-      location.href = shareURL
+      let link = document.createElement("a");
+      link.href = shareURL;
+      link.target = "_brank";
+      link.click();
     }
   },
   watch: {
