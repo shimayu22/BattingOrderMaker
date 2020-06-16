@@ -55,6 +55,7 @@
             <div id="preview-inner">
               <div id="team-name"> {{ selectTeam.displayName }} </div>
               <div id="user-name"> {{ !!userName ? userName : 'ななしさん' }}</div>
+              <div id="today">{{ today }}</div>
               <div v-for="(player, index) in selectPlayers" :key="index">
                 <div class="position" :style="(player.position === 'DH') ? { top: player.top, left: '86px' }:{ top: player.top }">{{ player.position }}</div>
                 <div class="player-name" :style="{ top: player.top }">{{ player.player.name }}</div>
@@ -131,7 +132,8 @@ export default {
                         {'order': 7, 'position': '', 'player': '', 'duplicatedPosition': false, 'duplicatedPlayer': false, 'top': '373px'},
                         {'order': 8, 'position': '', 'player': '', 'duplicatedPosition': false, 'duplicatedPlayer': false, 'top': '413px'},
                         {'order': 9, 'position': '', 'player': '', 'duplicatedPosition': false, 'duplicatedPlayer': false, 'top': '453px'}
-                     ]
+                     ],
+      today : ''
     }
   },
   methods: {
@@ -216,6 +218,14 @@ export default {
                      ];
       }
     }
+  },
+  created: function() {
+    let now = new Date();
+    let year = now.getFullYear();
+    let month = now.getMonth() + 1;
+    let day = now.getDate();
+
+    this.today = year + "/" + month + "/" + day;
   }
 }
 
