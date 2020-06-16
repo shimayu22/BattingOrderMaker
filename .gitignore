@@ -14,3 +14,5 @@ yarn-error.log
 !dist/index.html
 !dist/member.png
 !dist/style.css
+!dist/favicon.ico
+!dist/ogp.png
