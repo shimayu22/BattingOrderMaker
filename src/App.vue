@@ -167,7 +167,7 @@ export default {
       )
     },
     twitterShare() {
-      let shareURL = 'https://twitter.com/intent/tweet?text=' + "ぼくのかんがえた" + this.selectTeam.displayName + "のオーダー" + "%20%23野球 %20%23ぼくのオーダー %20%23" + this.selectTeam.hashTag + '&url=' + "https://battingordermaker.web.app/";
+      let shareURL = 'https://twitter.com/intent/tweet?text=' + "ぼくのかんがえた" + this.selectTeam.displayName + "のオーダー" + "%20%23野球 %20%23ぼく将オーダー %20%23" + this.selectTeam.hashTag + '&url=' + "https://battingordermaker.web.app/";
       location.href = shareURL
     }
   },
