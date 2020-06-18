@@ -1,6 +1,9 @@
 <template>
   <div id="app">
     <div class="text-center">
+      <p>
+        <button class="btn-danger btn" @click="resetData">データをリセットする</button>
+      </p>
       <div class="row justify-content-center">
         <div>
           <h2 class="pb-2">監督名を入れてね（任意）</h2>
@@ -174,6 +177,18 @@ export default {
       link.href = shareURL;
       link.target = "_brank";
       link.click();
+    },
+    resetData() {
+      Object.assign(this.$data, this.$options.data());
+      this.todaysDate();
+    },
+    todaysDate() {
+      let now = new Date();
+      let year = now.getFullYear();
+      let month = now.getMonth() + 1;
+      let day = now.getDate();
+
+      this.today = year + "/" + month + "/" + day;
     }
   },
   watch: {
@@ -225,12 +240,7 @@ export default {
     }
   },
   created: function() {
-    let now = new Date();
-    let year = now.getFullYear();
-    let month = now.getMonth() + 1;
-    let day = now.getDate();
-
-    this.today = year + "/" + month + "/" + day;
+    this.todaysDate();
   }
 }
 
