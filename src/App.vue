@@ -1,9 +1,6 @@
 <template>
   <div id="app">
     <div class="text-center">
-      <p>
-        <ClearButton @click="resetData"></ClearButton>
-      </p>
       <div class="row justify-content-center">
         <div>
           <h2 class="pb-2">監督名を入れてね（任意）</h2>
@@ -70,6 +67,8 @@
         </div>
       </div>
       <GenerateButton @click="generate"></GenerateButton>
+      <p class="mtb-2"></p>
+      <ClearButton @click="resetData"></ClearButton>
       <hr>
       <p>↓ここに表示される画像を右クリック or 長押しで保存してください</p>
       <p id="result"></p>
@@ -78,7 +77,7 @@
 
       <h4 class="pt-2 pb-2">ここからツイートしてね</h4>
       <div class="row justify-content-center">
-        <button class="btn btn-block btn-social btn-twitter btn-lg col-3" @click="twitterShare"><i class="fa fa-twitter"></i>　ツイートする</button>
+        <button class="btn btn-block btn-social btn-twitter btn-lg col-4 text-center" @click="twitterShare"><i class="fa fa-twitter"></i>ツイートする</button>
       </div>
 
     </div>
