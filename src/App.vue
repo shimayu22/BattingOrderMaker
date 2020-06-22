@@ -98,6 +98,8 @@ import eagles from '../src/assets/eagles.json';
 import marines from '../src/assets/marines.json';
 import fighters from '../src/assets/fighters.json';
 import buffaloes from '../src/assets/buffaloes.json';
+import central from '../src/assets/central.json';
+import pacific from '../src/assets/pacific.json';
 import html2canvas from 'html2canvas';
 
 export default {
@@ -106,22 +108,8 @@ export default {
     return {
       userName: '',
       selectLeague: 'central',
-      npb: {'central': [
-                          {'jsonName': 'giants', 'displayName': '読売ジャイアンツ', 'hashTag': 'giants'},
-                          {'jsonName': 'baystars', 'displayName': '横浜DeNAベイスターズ', 'hashTag': 'baystars'},
-                          {'jsonName': 'tigers', 'displayName': '阪神タイガース', 'hashTag': 'tigers'},
-                          {'jsonName': 'carp', 'displayName': '広島東洋カープ', 'hashTag': 'carp'},
-                          {'jsonName': 'dragons', 'displayName': '中日ドラゴンズ', 'hashTag': 'dragons'},
-                          {'jsonName': 'swallows', 'displayName': '東京ヤクルトスワローズ', 'hashTag': 'swallows'}
-                       ],
-            'pacific': [
-                          {'jsonName': 'lions', 'displayName': '埼玉西武ライオンズ', 'hashTag': 'seibulions'}, 
-                          {'jsonName': 'hawks', 'displayName': '福岡ソフトバンクホークス', 'hashTag': 'sbhawks'},
-                          {'jsonName': 'eagles', 'displayName': '東北楽天ゴールデンイーグルス', 'hashTag': 'RakutenEagles'},
-                          {'jsonName': 'marines', 'displayName': '千葉ロッテマリーンズ', 'hashTag': 'chibalotte'},
-                          {'jsonName': 'fighters', 'displayName': '北海道日本ハムファイターズ', 'hashTag': 'lovefighters'},
-                          {'jsonName': 'buffaloes', 'displayName': 'オリックス・バファローズ', 'hashTag': 'Bs2020'}
-                       ]
+      npb: {'central': central,
+            'pacific': pacific
            },
       selectTeam: '',
       npbPlayers: {'giants':giants, 'baystars': baystars, 'tigers': tigers, 'carp': carp, 'dragons': dragons, 'swallows': swallows,

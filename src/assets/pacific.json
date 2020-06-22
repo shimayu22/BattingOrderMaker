@@ -1,0 +1,32 @@
+[
+  {
+    "jsonName": "lions",
+    "displayName": "埼玉西武ライオンズ",
+    "hashTag": "seibulions"
+  }, 
+  {
+    "jsonName": "hawks",
+    "displayName": "福岡ソフトバンクホークス",
+    "hashTag": "sbhawks"
+  },
+  {
+    "jsonName": "eagles",
+    "displayName": "東北楽天ゴールデンイーグルス",
+    "hashTag": "RakutenEagles"
+  },
+  {
+    "jsonName": "marines",
+    "displayName": "千葉ロッテマリーンズ",
+    "hashTag": "chibalotte"
+  },
+  {
+    "jsonName": "fighters",
+    "displayName": "北海道日本ハムファイターズ",
+    "hashTag": "lovefighters"
+  },
+  {
+    "jsonName": "buffaloes",
+    "displayName": "オリックス・バファローズ",
+    "hashTag": "Bs2020"
+  }
+]
