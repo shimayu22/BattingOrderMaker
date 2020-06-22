@@ -1,9 +1,6 @@
 <template>
   <div id="app">
     <div class="text-center">
-      <p>
-        <button class="btn-danger btn" @click="resetData">データをリセットする</button>
-      </p>
       <div class="row justify-content-center">
         <div>
           <h2 class="pb-2">監督名を入れてね（任意）</h2>
@@ -69,7 +66,9 @@
           </div>
         </div>
       </div>
-      <button class="btn-primary btn-lg col-4" @click="generate">画像を生成する</button>
+      <GenerateButton @click="generate"></GenerateButton>
+      <p class="mtb-2"></p>
+      <ClearButton @click="resetData"></ClearButton>
       <hr>
       <p>↓ここに表示される画像を右クリック or 長押しで保存してください</p>
       <p id="result"></p>
@@ -78,7 +77,7 @@
 
       <h4 class="pt-2 pb-2">ここからツイートしてね</h4>
       <div class="row justify-content-center">
-        <button class="btn btn-block btn-social btn-twitter btn-lg col-4" @click="twitterShare"><i class="fa fa-twitter"></i>　　オーダーをツイートする</button>
+        <button class="btn btn-block btn-social btn-twitter btn-lg col-4 text-center" @click="twitterShare"><i class="fa fa-twitter"></i>ツイートする</button>
       </div>
 
     </div>
@@ -98,7 +97,11 @@ import eagles from '../src/assets/eagles.json';
 import marines from '../src/assets/marines.json';
 import fighters from '../src/assets/fighters.json';
 import buffaloes from '../src/assets/buffaloes.json';
+import central from '../src/assets/central.json';
+import pacific from '../src/assets/pacific.json';
 import html2canvas from 'html2canvas';
+import GenerateButton from '../src/components/GenerateButton';
+import ClearButton from '../src/components/ClearButton';
 
 export default {
   name: 'app',
@@ -106,22 +109,8 @@ export default {
     return {
       userName: '',
       selectLeague: 'central',
-      npb: {'central': [
-                          {'jsonName': 'giants', 'displayName': '読売ジャイアンツ', 'hashTag': 'giants'},
-                          {'jsonName': 'baystars', 'displayName': '横浜DeNAベイスターズ', 'hashTag': 'baystars'},
-                          {'jsonName': 'tigers', 'displayName': '阪神タイガース', 'hashTag': 'tigers'},
-                          {'jsonName': 'carp', 'displayName': '広島東洋カープ', 'hashTag': 'carp'},
-                          {'jsonName': 'dragons', 'displayName': '中日ドラゴンズ', 'hashTag': 'dragons'},
-                          {'jsonName': 'swallows', 'displayName': '東京ヤクルトスワローズ', 'hashTag': 'swallows'}
-                       ],
-            'pacific': [
-                          {'jsonName': 'lions', 'displayName': '埼玉西武ライオンズ', 'hashTag': 'seibulions'}, 
-                          {'jsonName': 'hawks', 'displayName': '福岡ソフトバンクホークス', 'hashTag': 'sbhawks'},
-                          {'jsonName': 'eagles', 'displayName': '東北楽天ゴールデンイーグルス', 'hashTag': 'RakutenEagles'},
-                          {'jsonName': 'marines', 'displayName': '千葉ロッテマリーンズ', 'hashTag': 'chibalotte'},
-                          {'jsonName': 'fighters', 'displayName': '北海道日本ハムファイターズ', 'hashTag': 'lovefighters'},
-                          {'jsonName': 'buffaloes', 'displayName': 'オリックス・バファローズ', 'hashTag': 'Bs2020'}
-                       ]
+      npb: {'central': central,
+            'pacific': pacific
            },
       selectTeam: '',
       npbPlayers: {'giants':giants, 'baystars': baystars, 'tigers': tigers, 'carp': carp, 'dragons': dragons, 'swallows': swallows,
@@ -241,6 +230,10 @@ export default {
   },
   created: function() {
     this.todaysDate();
+  },
+  components: {
+    GenerateButton,
+    ClearButton
   }
 }
 

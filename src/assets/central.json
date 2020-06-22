@@ -1,0 +1,32 @@
+[
+  {
+    "jsonName": "giants",
+    "displayName": "読売ジャイアンツ",
+    "hashTag": "giants"
+  },
+  {
+    "jsonName": "baystars",
+    "displayName": "横浜DeNAベイスターズ",
+    "hashTag": "baystars"
+  },
+  {
+    "jsonName": "tigers",
+    "displayName": "阪神タイガース",
+    "hashTag": "tigers"
+  },
+  {
+    "jsonName": "carp",
+    "displayName": "広島東洋カープ",
+    "hashTag": "carp"
+  },
+  {
+    "jsonName": "dragons",
+    "displayName": "中日ドラゴンズ",
+    "hashTag": "dragons"
+  },
+  {
+    "jsonName": "swallows",
+    "displayName": "東京ヤクルトスワローズ",
+    "hashTag": "swallows"
+  }
+]
