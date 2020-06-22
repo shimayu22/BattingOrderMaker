@@ -2,7 +2,7 @@
   <div id="app">
     <div class="text-center">
       <p>
-        <button class="btn-danger btn" @click="resetData">データをリセットする</button>
+        <ClearButton @click="resetData"></ClearButton>
       </p>
       <div class="row justify-content-center">
         <div>
@@ -102,6 +102,7 @@ import central from '../src/assets/central.json';
 import pacific from '../src/assets/pacific.json';
 import html2canvas from 'html2canvas';
 import GenerateButton from '../src/components/GenerateButton';
+import ClearButton from '../src/components/ClearButton';
 
 export default {
   name: 'app',
@@ -232,7 +233,8 @@ export default {
     this.todaysDate();
   },
   components: {
-    GenerateButton
+    GenerateButton,
+    ClearButton
   }
 }
 
