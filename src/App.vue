@@ -69,7 +69,7 @@
           </div>
         </div>
       </div>
-      <button class="btn-primary btn-lg col-4" @click="generate">画像を生成する</button>
+      <GenerateButton @click="generate"></GenerateButton>
       <hr>
       <p>↓ここに表示される画像を右クリック or 長押しで保存してください</p>
       <p id="result"></p>
@@ -78,7 +78,7 @@
 
       <h4 class="pt-2 pb-2">ここからツイートしてね</h4>
       <div class="row justify-content-center">
-        <button class="btn btn-block btn-social btn-twitter btn-lg col-4" @click="twitterShare"><i class="fa fa-twitter"></i>　　オーダーをツイートする</button>
+        <button class="btn btn-block btn-social btn-twitter btn-lg col-3" @click="twitterShare"><i class="fa fa-twitter"></i>　ツイートする</button>
       </div>
 
     </div>
@@ -101,6 +101,7 @@ import buffaloes from '../src/assets/buffaloes.json';
 import central from '../src/assets/central.json';
 import pacific from '../src/assets/pacific.json';
 import html2canvas from 'html2canvas';
+import GenerateButton from '../src/components/GenerateButton';
 
 export default {
   name: 'app',
@@ -229,6 +230,9 @@ export default {
   },
   created: function() {
     this.todaysDate();
+  },
+  components: {
+    GenerateButton
   }
 }
 
