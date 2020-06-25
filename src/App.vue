@@ -1,16 +1,7 @@
 <template>
   <div id="app">
     <div class="text-center">
-      <div class="row justify-content-center">
-        <div>
-          <h2 class="pb-2">監督名を入れてね（任意）</h2>
-          <div class="input-group">
-            <input class="form-control" placeholder="ななしさん" v-model="userName">
-            <div class="input-group-append"><span class="input-group-text">監督</span></div>
-          </div>
-        </div>
-      </div>
-
+      <input-name @input="userName = $event"></input-name>
       <h2 class="pt-4 pb-2">リーグを選んでね</h2>
       <div class="form-check form-check-inline">
         <label class="form-check-label">
@@ -66,9 +57,9 @@
           </div>
         </div>
       </div>
-      <GenerateButton @click="generate"></GenerateButton>
+      <generate-button @click="generate"></generate-button>
       <p class="mtb-2"></p>
-      <ClearButton @click="resetData"></ClearButton>
+      <clear-button @click="resetData"></clear-button>
       <hr>
       <p>↓ここに表示される画像を右クリック or 長押しで保存してください</p>
       <p id="result"></p>
@@ -85,23 +76,24 @@
 </template>
 
 <script>
-import giants from '../src/assets/giants.json';
-import baystars from '../src/assets/baystars.json';
-import tigers from '../src/assets/tigers.json';
-import carp from '../src/assets/carp.json';
-import dragons from '../src/assets/dragons.json';
-import swallows from '../src/assets/swallows.json';
-import lions from '../src/assets/lions.json';
-import hawks from '../src/assets/hawks.json';
-import eagles from '../src/assets/eagles.json';
-import marines from '../src/assets/marines.json';
-import fighters from '../src/assets/fighters.json';
-import buffaloes from '../src/assets/buffaloes.json';
-import central from '../src/assets/central.json';
-import pacific from '../src/assets/pacific.json';
+import giants from './assets/giants.json';
+import baystars from './assets/baystars.json';
+import tigers from './assets/tigers.json';
+import carp from './assets/carp.json';
+import dragons from './assets/dragons.json';
+import swallows from './assets/swallows.json';
+import lions from './assets/lions.json';
+import hawks from './assets/hawks.json';
+import eagles from './assets/eagles.json';
+import marines from './assets/marines.json';
+import fighters from './assets/fighters.json';
+import buffaloes from './assets/buffaloes.json';
+import central from './assets/central.json';
+import pacific from './assets/pacific.json';
 import html2canvas from 'html2canvas';
-import GenerateButton from '../src/components/GenerateButton';
-import ClearButton from '../src/components/ClearButton';
+import GenerateButton from './components/GenerateButton';
+import ClearButton from './components/ClearButton';
+import InputName from './components/InputName';
 
 export default {
   name: 'app',
@@ -232,8 +224,9 @@ export default {
     this.todaysDate();
   },
   components: {
-    GenerateButton,
-    ClearButton
+    'generate-button': GenerateButton,
+    'clear-button': ClearButton,
+    'input-name': InputName
   }
 }
 
