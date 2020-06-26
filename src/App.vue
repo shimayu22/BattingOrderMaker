@@ -1,7 +1,7 @@
 <template>
   <div id="app">
     <div class="text-center">
-      <input-name @input="userName = $event"></input-name>
+      <input-name v-model="userName"></input-name>
       <h2 class="pt-4 pb-2">リーグを選んでね</h2>
       <div class="form-check form-check-inline">
         <label class="form-check-label">
