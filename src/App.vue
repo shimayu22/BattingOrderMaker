@@ -1,7 +1,10 @@
 <template>
   <div id="app">
     <div class="text-center">
-      <input-name v-model="userName"></input-name>
+      <margin-div>
+        <input-name v-model="userName"></input-name>
+      </margin-div>
+      <margin-div>
       <heading2>リーグを選んでね</heading2>
       <div class="form-check form-check-inline">
         <label class="form-check-label">
@@ -15,13 +18,15 @@
           <span class="leagu-name">パ・リーグ</span>
           </label>
       </div>
-
+      </margin-div>
+<margin-div>
       <heading2>球団を選んでね</heading2>
       <select v-model="selectTeam" class="custom-select-lg col-4">
         <option disabled value="" class="text-center">球団を選択してください</option>
         <option v-for="(team, index) in npb[selectLeague]" :key="index" :value="team">{{ team.displayName }}</option>
       </select>
-
+</margin-div>
+<margin-div>
       <heading2>打順を組んでね</heading2>
       <p>※重複するとその箇所が赤くなりますが、エラーにはなりません。</p>
       <div>
@@ -38,7 +43,8 @@
           </select>
         </div>
       </div>
-
+</margin-div>
+<margin-div>
       <heading2>プレビューだよ</heading2>
       <div class="row justify-content-center">
         <div>
@@ -57,6 +63,7 @@
           </div>
         </div>
       </div>
+      </margin-div>
       <generate-button @click="generate"></generate-button>
       <p class="mtb-2"></p>
       <clear-button @click="resetData"></clear-button>
@@ -95,6 +102,7 @@ import GenerateButton from './components/GenerateButton';
 import ClearButton from './components/ClearButton';
 import InputName from './components/InputName';
 import Heading2 from './components/Heading2';
+import MarginDiv from './components/MarginDiv';
 
 export default {
   name: 'app',
@@ -228,7 +236,8 @@ export default {
     'generate-button': GenerateButton,
     'clear-button': ClearButton,
     'input-name': InputName,
-    'heading2': Heading2
+    'heading2': Heading2,
+    'margin-div': MarginDiv
   }
 }
 
