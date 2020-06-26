@@ -2,7 +2,7 @@
   <div id="app">
     <div class="text-center">
       <input-name v-model="userName"></input-name>
-      <h2 class="pt-4 pb-2">リーグを選んでね</h2>
+      <heading2>リーグを選んでね</heading2>
       <div class="form-check form-check-inline">
         <label class="form-check-label">
           <input class="form-check-input" type="radio" id="central" value="central" v-model="selectLeague" checked>
@@ -16,13 +16,13 @@
           </label>
       </div>
 
-      <h2 class="pt-4 pb-2">球団を選んでね</h2>
+      <heading2>球団を選んでね</heading2>
       <select v-model="selectTeam" class="custom-select-lg col-4">
         <option disabled value="" class="text-center">球団を選択してください</option>
         <option v-for="(team, index) in npb[selectLeague]" :key="index" :value="team">{{ team.displayName }}</option>
       </select>
 
-      <h2 class="pt-4 pb-2">打順を組んでね</h2>
+      <heading2>打順を組んでね</heading2>
       <p>※重複するとその箇所が赤くなりますが、エラーにはなりません。</p>
       <div>
         <div v-for="(selectPlayer, index) in selectPlayers" :key="index" class="mt-2">
@@ -39,7 +39,7 @@
         </div>
       </div>
 
-      <h4  class="pt-4 pb-2">プレビューだよ</h4>
+      <heading2>プレビューだよ</heading2>
       <div class="row justify-content-center">
         <div>
           <div id="preview" class="pb-4">
@@ -66,7 +66,7 @@
       <!-- <button class="btn-primary btn-lg" @click="download">画像をダウンロード(PC用)</button> -->
       <hr>
 
-      <h4 class="pt-2 pb-2">ここからツイートしてね</h4>
+      <heading2>ここからツイートしてね</heading2>
       <div class="row justify-content-center">
         <button class="btn btn-block btn-social btn-twitter btn-lg col-4 text-center" @click="twitterShare"><i class="fa fa-twitter"></i>ツイートする</button>
       </div>
@@ -94,6 +94,7 @@ import html2canvas from 'html2canvas';
 import GenerateButton from './components/GenerateButton';
 import ClearButton from './components/ClearButton';
 import InputName from './components/InputName';
+import Heading2 from './components/Heading2';
 
 export default {
   name: 'app',
@@ -226,7 +227,8 @@ export default {
   components: {
     'generate-button': GenerateButton,
     'clear-button': ClearButton,
-    'input-name': InputName
+    'input-name': InputName,
+    'heading2': Heading2
   }
 }
 
