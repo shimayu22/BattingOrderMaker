@@ -1,168 +1,286 @@
 <template>
   <div id="app">
-    <div class="text-center">
-      <margin-div>
-        <input-name v-model="userName"></input-name>
-      </margin-div>
-      <margin-div>
+    <margin-div>
+      <input-name v-model="userName"></input-name>
+    </margin-div>
+    <margin-div>
       <heading2>リーグを選んでね</heading2>
       <div class="form-check form-check-inline">
         <label class="form-check-label">
-          <input class="form-check-input" type="radio" id="central" value="central" v-model="selectLeague" checked>
+          <input
+            class="form-check-input"
+            type="radio"
+            id="central"
+            value="central"
+            v-model="selectLeague"
+            checked
+          />
           <span class="leagu-name">セ・リーグ</span>
         </label>
       </div>
       <div class="form-check form-check-inline">
         <label class="form-check-label">
-          <input class="form-check-input" type="radio" id="pacific" value="pacific" v-model="selectLeague">
+          <input
+            class="form-check-input"
+            type="radio"
+            id="pacific"
+            value="pacific"
+            v-model="selectLeague"
+          />
           <span class="leagu-name">パ・リーグ</span>
-          </label>
+        </label>
       </div>
-      </margin-div>
-<margin-div>
+    </margin-div>
+    <margin-div>
       <heading2>球団を選んでね</heading2>
       <select v-model="selectTeam" class="custom-select-lg col-4">
-        <option disabled value="" class="text-center">球団を選択してください</option>
-        <option v-for="(team, index) in npb[selectLeague]" :key="index" :value="team">{{ team.displayName }}</option>
+        <option disabled value class="text-center">球団を選択してください</option>
+        <option
+          v-for="(team, index) in npb[selectLeague]"
+          :key="index"
+          :value="team"
+        >{{ team.displayName }}</option>
       </select>
-</margin-div>
-<margin-div>
+    </margin-div>
+    <margin-div>
       <heading2>打順を組んでね</heading2>
       <p>※重複するとその箇所が赤くなりますが、エラーにはなりません。</p>
       <div>
         <div v-for="(selectPlayer, index) in selectPlayers" :key="index" class="mt-2">
-          {{ index + 1 }}　：　
-          <select class="custom-select col-1" v-model="selectPlayer.position" :class="{ duplicated: selectPlayer.duplicatedPosition }">
-            <option disabled value="">守備</option>
+          {{ index + 1 }} ：
+          <select
+            class="custom-select col-1"
+            v-model="selectPlayer.position"
+            :class="{ duplicated: selectPlayer.duplicatedPosition }"
+          >
+            <option disabled value>守備</option>
             <option v-for="(position, index) in positions" :key="index">{{ position }}</option>
           </select>
-          　
-          <select class="custom-select col-4" v-model="selectPlayer.player" :class="{ duplicated: selectPlayer.duplicatedPlayer }">
-            <option disabled value="">選手</option>
-            <option v-for="(player, index) in npbPlayers[selectTeam.jsonName]" :key="index" :value="player">{{ player.name }}</option>
+
+          <select
+            class="custom-select col-4"
+            v-model="selectPlayer.player"
+            :class="{ duplicated: selectPlayer.duplicatedPlayer }"
+          >
+            <option disabled value>選手</option>
+            <option
+              v-for="(player, index) in npbPlayers[selectTeam.jsonName]"
+              :key="index"
+              :value="player"
+            >{{ player.name }}</option>
           </select>
         </div>
       </div>
-</margin-div>
-<margin-div>
+    </margin-div>
+    <margin-div>
       <heading2>プレビューだよ</heading2>
       <div class="row justify-content-center">
         <div>
           <div id="preview" class="pb-4">
             <div id="preview-inner">
-              <div id="team-name"> {{ selectTeam.displayName }} </div>
-              <div id="user-name"> {{ !!userName ? userName : 'ななしさん' }}</div>
+              <div id="team-name">{{ selectTeam.displayName }}</div>
+              <div id="user-name">{{ !!userName ? userName : 'ななしさん' }}</div>
               <div id="today">{{ today }}</div>
               <div v-for="(player, index) in selectPlayers" :key="index">
-                <div class="position" :style="(player.position === 'DH') ? { top: player.top, left: '86px' }:{ top: player.top }">{{ player.position }}</div>
+                <div
+                  class="position"
+                  :style="(player.position === 'DH') ? { top: player.top, left: '86px' }:{ top: player.top }"
+                >{{ player.position }}</div>
                 <div class="player-name" :style="{ top: player.top }">{{ player.player.name }}</div>
-                <div class="number" :style="{ top: player.top, left: player.player.left }">{{ player.player.id }}</div>
+                <div
+                  class="number"
+                  :style="{ top: player.top, left: player.player.left }"
+                >{{ player.player.id }}</div>
                 <div class="bt" :style="{ top: player.top }">{{ player.player.bt }}</div>
               </div>
             </div>
           </div>
         </div>
       </div>
-      </margin-div>
-      <generate-button @click="generate"></generate-button>
-      <p class="mtb-2"></p>
-      <clear-button @click="resetData"></clear-button>
-      <hr>
-      <p>↓ここに表示される画像を右クリック or 長押しで保存してください</p>
-      <p id="result"></p>
-      <!-- <button class="btn-primary btn-lg" @click="download">画像をダウンロード(PC用)</button> -->
-      <hr>
+    </margin-div>
+    <generate-button @click="generate"></generate-button>
+    <p class="mtb-2"></p>
+    <clear-button @click="resetData"></clear-button>
+    <hr />
+    <p class="text-center">↓ここに表示される画像を右クリック or 長押しで保存してください</p>
+    <p id="result"></p>
+    <!-- <button class="btn-primary btn-lg" @click="download">画像をダウンロード(PC用)</button> -->
+    <hr />
 
-      <heading2>ここからツイートしてね</heading2>
-      <div class="row justify-content-center">
-        <button class="btn btn-block btn-social btn-twitter btn-lg col-4 text-center" @click="twitterShare"><i class="fa fa-twitter"></i>ツイートする</button>
-      </div>
-
+    <heading2>ここからツイートしてね</heading2>
+    <div class="row justify-content-center">
+      <button
+        class="btn btn-block btn-social btn-twitter btn-lg col-4 text-center"
+        @click="twitterShare"
+      >
+        <i class="fa fa-twitter"></i>ツイートする
+      </button>
     </div>
   </div>
 </template>
 
 <script>
-import giants from './assets/giants.json';
-import baystars from './assets/baystars.json';
-import tigers from './assets/tigers.json';
-import carp from './assets/carp.json';
-import dragons from './assets/dragons.json';
-import swallows from './assets/swallows.json';
-import lions from './assets/lions.json';
-import hawks from './assets/hawks.json';
-import eagles from './assets/eagles.json';
-import marines from './assets/marines.json';
-import fighters from './assets/fighters.json';
-import buffaloes from './assets/buffaloes.json';
-import central from './assets/central.json';
-import pacific from './assets/pacific.json';
-import html2canvas from 'html2canvas';
-import GenerateButton from './components/GenerateButton';
-import ClearButton from './components/ClearButton';
-import InputName from './components/InputName';
-import Heading2 from './components/Heading2';
-import MarginDiv from './components/MarginDiv';
+import giants from "./assets/giants.json";
+import baystars from "./assets/baystars.json";
+import tigers from "./assets/tigers.json";
+import carp from "./assets/carp.json";
+import dragons from "./assets/dragons.json";
+import swallows from "./assets/swallows.json";
+import lions from "./assets/lions.json";
+import hawks from "./assets/hawks.json";
+import eagles from "./assets/eagles.json";
+import marines from "./assets/marines.json";
+import fighters from "./assets/fighters.json";
+import buffaloes from "./assets/buffaloes.json";
+import central from "./assets/central.json";
+import pacific from "./assets/pacific.json";
+import html2canvas from "html2canvas";
+import GenerateButton from "./components/GenerateButton";
+import ClearButton from "./components/ClearButton";
+import InputName from "./components/InputName";
+import Heading2 from "./components/Heading2";
+import MarginDiv from "./components/MarginDiv";
 
 export default {
-  name: 'app',
-  data () {
+  name: "app",
+  data() {
     return {
-      userName: '',
-      selectLeague: 'central',
-      npb: {'central': central,
-            'pacific': pacific
-           },
-      selectTeam: '',
-      npbPlayers: {'giants':giants, 'baystars': baystars, 'tigers': tigers, 'carp': carp, 'dragons': dragons, 'swallows': swallows,
-                    'lions': lions, 'hawks': hawks, 'eagles':eagles, 'marines': marines, 'fighters': fighters, 'buffaloes': buffaloes},
-      positions: ['投', '捕', '一', '二', '三', '遊', '左', '中', '右', 'DH'],
+      userName: "",
+      selectLeague: "central",
+      npb: { central: central, pacific: pacific },
+      selectTeam: "",
+      npbPlayers: {
+        giants: giants,
+        baystars: baystars,
+        tigers: tigers,
+        carp: carp,
+        dragons: dragons,
+        swallows: swallows,
+        lions: lions,
+        hawks: hawks,
+        eagles: eagles,
+        marines: marines,
+        fighters: fighters,
+        buffaloes: buffaloes
+      },
+      positions: ["投", "捕", "一", "二", "三", "遊", "左", "中", "右", "DH"],
       selectPlayers: [
-                        {'order': 1, 'position': '', 'player': '', 'duplicatedPosition': false, 'duplicatedPlayer': false, 'top': '135px'},
-                        {'order': 2, 'position': '', 'player': '', 'duplicatedPosition': false, 'duplicatedPlayer': false, 'top': '175px'},
-                        {'order': 3, 'position': '', 'player': '', 'duplicatedPosition': false, 'duplicatedPlayer': false, 'top': '214px'},
-                        {'order': 4, 'position': '', 'player': '', 'duplicatedPosition': false, 'duplicatedPlayer': false, 'top': '254px'},
-                        {'order': 5, 'position': '', 'player': '', 'duplicatedPosition': false, 'duplicatedPlayer': false, 'top': '294px'},
-                        {'order': 6, 'position': '', 'player': '', 'duplicatedPosition': false, 'duplicatedPlayer': false, 'top': '334px'},
-                        {'order': 7, 'position': '', 'player': '', 'duplicatedPosition': false, 'duplicatedPlayer': false, 'top': '373px'},
-                        {'order': 8, 'position': '', 'player': '', 'duplicatedPosition': false, 'duplicatedPlayer': false, 'top': '413px'},
-                        {'order': 9, 'position': '', 'player': '', 'duplicatedPosition': false, 'duplicatedPlayer': false, 'top': '453px'}
-                     ],
-      today : ''
-    }
+        {
+          order: 1,
+          position: "",
+          player: "",
+          duplicatedPosition: false,
+          duplicatedPlayer: false,
+          top: "135px"
+        },
+        {
+          order: 2,
+          position: "",
+          player: "",
+          duplicatedPosition: false,
+          duplicatedPlayer: false,
+          top: "175px"
+        },
+        {
+          order: 3,
+          position: "",
+          player: "",
+          duplicatedPosition: false,
+          duplicatedPlayer: false,
+          top: "214px"
+        },
+        {
+          order: 4,
+          position: "",
+          player: "",
+          duplicatedPosition: false,
+          duplicatedPlayer: false,
+          top: "254px"
+        },
+        {
+          order: 5,
+          position: "",
+          player: "",
+          duplicatedPosition: false,
+          duplicatedPlayer: false,
+          top: "294px"
+        },
+        {
+          order: 6,
+          position: "",
+          player: "",
+          duplicatedPosition: false,
+          duplicatedPlayer: false,
+          top: "334px"
+        },
+        {
+          order: 7,
+          position: "",
+          player: "",
+          duplicatedPosition: false,
+          duplicatedPlayer: false,
+          top: "373px"
+        },
+        {
+          order: 8,
+          position: "",
+          player: "",
+          duplicatedPosition: false,
+          duplicatedPlayer: false,
+          top: "413px"
+        },
+        {
+          order: 9,
+          position: "",
+          player: "",
+          duplicatedPosition: false,
+          duplicatedPlayer: false,
+          top: "453px"
+        }
+      ],
+      today: ""
+    };
   },
   methods: {
     generate() {
       if (!!document.getElementById("resultImg")) {
-            let resultImg = document.getElementById("resultImg");
-            resultImg.remove();
+        let resultImg = document.getElementById("resultImg");
+        resultImg.remove();
       }
-      html2canvas(document.getElementById('preview-inner')).then(
-        function(canvas){
-          let img = document.createElement("img");
-          img.src = canvas.toDataURL('image/png');
-          img.width = "500";
-          img.height = "500";
-          img.id = "resultImg";
-          
-          let parentElement = document.getElementById("result").parentNode;
-          let p = document.getElementById("result");
-          parentElement.insertBefore(img, p);
-        }
-      )
+      html2canvas(document.getElementById("preview-inner")).then(function(
+        canvas
+      ) {
+        let img = document.createElement("img");
+        img.src = canvas.toDataURL("image/png");
+        img.width = "500";
+        img.height = "500";
+        img.id = "resultImg";
+
+        let parentElement = document.getElementById("result").parentNode;
+        let p = document.getElementById("result");
+        parentElement.insertBefore(img, p);
+      });
     },
     download() {
-      html2canvas(document.getElementById('preview-inner')).then(
-        function(canvas){
-          let link = document.createElement("a");
-          link.href = canvas.toDataURL('image/png');
-          link.download = "myorder.png";
-          link.click();
-        }
-      )
+      html2canvas(document.getElementById("preview-inner")).then(function(
+        canvas
+      ) {
+        let link = document.createElement("a");
+        link.href = canvas.toDataURL("image/png");
+        link.download = "myorder.png";
+        link.click();
+      });
     },
     twitterShare() {
-      let shareURL = 'https://twitter.com/intent/tweet?text=' + "ぼくのかんがえた" + this.selectTeam.displayName + "のオーダー" + "%20%23野球 %20%23ぼく将オーダー %20%23" + this.selectTeam.hashTag + '&url=' + "https://battingordermaker.web.app/";
+      let shareURL =
+        "https://twitter.com/intent/tweet?text=" +
+        "ぼくのかんがえた" +
+        this.selectTeam.displayName +
+        "のオーダー" +
+        "%20%23野球 %20%23ぼく将オーダー %20%23" +
+        this.selectTeam.hashTag +
+        "&url=" +
+        "https://battingordermaker.web.app/";
       let link = document.createElement("a");
       link.href = shareURL;
       link.target = "_brank";
@@ -191,15 +309,15 @@ export default {
             if (positions.indexOf(e.position) === -1) {
               positions.push(e.position);
               e.duplicatedPosition = false;
-            }else{
+            } else {
               e.duplicatedPosition = true;
             }
           }
-          if (e.player !== '') {
+          if (e.player !== "") {
             if (players.indexOf(e.player.name) === -1) {
               players.push(e.player.name);
               e.duplicatedPlayer = false;
-            }else{
+            } else {
               e.duplicatedPlayer = true;
             }
           }
@@ -210,22 +328,85 @@ export default {
     },
     selectLeague: {
       handler: function() {
-        this.selectTeam = '';
+        this.selectTeam = "";
       }
     },
     selectTeam: {
       handler: function() {
         this.selectPlayers = [
-                        {'order': 1, 'position': '', 'player': '', 'duplicatedPosition': false, 'duplicatedPlayer': false, 'top': '135px'},
-                        {'order': 2, 'position': '', 'player': '', 'duplicatedPosition': false, 'duplicatedPlayer': false, 'top': '175px'},
-                        {'order': 3, 'position': '', 'player': '', 'duplicatedPosition': false, 'duplicatedPlayer': false, 'top': '214px'},
-                        {'order': 4, 'position': '', 'player': '', 'duplicatedPosition': false, 'duplicatedPlayer': false, 'top': '254px'},
-                        {'order': 5, 'position': '', 'player': '', 'duplicatedPosition': false, 'duplicatedPlayer': false, 'top': '294px'},
-                        {'order': 6, 'position': '', 'player': '', 'duplicatedPosition': false, 'duplicatedPlayer': false, 'top': '334px'},
-                        {'order': 7, 'position': '', 'player': '', 'duplicatedPosition': false, 'duplicatedPlayer': false, 'top': '373px'},
-                        {'order': 8, 'position': '', 'player': '', 'duplicatedPosition': false, 'duplicatedPlayer': false, 'top': '413px'},
-                        {'order': 9, 'position': '', 'player': '', 'duplicatedPosition': false, 'duplicatedPlayer': false, 'top': '453px'}
-                     ];
+          {
+            order: 1,
+            position: "",
+            player: "",
+            duplicatedPosition: false,
+            duplicatedPlayer: false,
+            top: "135px"
+          },
+          {
+            order: 2,
+            position: "",
+            player: "",
+            duplicatedPosition: false,
+            duplicatedPlayer: false,
+            top: "175px"
+          },
+          {
+            order: 3,
+            position: "",
+            player: "",
+            duplicatedPosition: false,
+            duplicatedPlayer: false,
+            top: "214px"
+          },
+          {
+            order: 4,
+            position: "",
+            player: "",
+            duplicatedPosition: false,
+            duplicatedPlayer: false,
+            top: "254px"
+          },
+          {
+            order: 5,
+            position: "",
+            player: "",
+            duplicatedPosition: false,
+            duplicatedPlayer: false,
+            top: "294px"
+          },
+          {
+            order: 6,
+            position: "",
+            player: "",
+            duplicatedPosition: false,
+            duplicatedPlayer: false,
+            top: "334px"
+          },
+          {
+            order: 7,
+            position: "",
+            player: "",
+            duplicatedPosition: false,
+            duplicatedPlayer: false,
+            top: "373px"
+          },
+          {
+            order: 8,
+            position: "",
+            player: "",
+            duplicatedPosition: false,
+            duplicatedPlayer: false,
+            top: "413px"
+          },
+          {
+            order: 9,
+            position: "",
+            player: "",
+            duplicatedPosition: false,
+            duplicatedPlayer: false,
+            top: "453px"
+          }
+        ];
       }
     }
   },
@@ -233,13 +414,12 @@ export default {
     this.todaysDate();
   },
   components: {
-    'generate-button': GenerateButton,
-    'clear-button': ClearButton,
-    'input-name': InputName,
-    'heading2': Heading2,
-    'margin-div': MarginDiv
+    "generate-button": GenerateButton,
+    "clear-button": ClearButton,
+    "input-name": InputName,
+    heading2: Heading2,
+    "margin-div": MarginDiv
   }
-}
-
+};
 </script>
 
