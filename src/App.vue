@@ -1,36 +1,7 @@
 <template>
   <div id="app">
-    <margin-div>
-      <input-name v-model="userName"></input-name>
-    </margin-div>
-    <margin-div>
-      <heading2>リーグを選んでね</heading2>
-      <div class="form-check form-check-inline">
-        <label class="form-check-label">
-          <input
-            class="form-check-input"
-            type="radio"
-            id="central"
-            value="central"
-            v-model="selectLeague"
-            checked
-          />
-          <span class="leagu-name">セ・リーグ</span>
-        </label>
-      </div>
-      <div class="form-check form-check-inline">
-        <label class="form-check-label">
-          <input
-            class="form-check-input"
-            type="radio"
-            id="pacific"
-            value="pacific"
-            v-model="selectLeague"
-          />
-          <span class="leagu-name">パ・リーグ</span>
-        </label>
-      </div>
-    </margin-div>
+    <input-name v-model="userName"></input-name>
+    <select-league v-model="selectLeague" name="league-radio" :options="leagueName"></select-league>
     <margin-div>
       <heading2>球団を選んでね</heading2>
       <select v-model="selectTeam" class="custom-select-lg col-4">
@@ -138,6 +109,7 @@ import html2canvas from "html2canvas";
 import GenerateButton from "./components/GenerateButton";
 import ClearButton from "./components/ClearButton";
 import InputName from "./components/InputName";
+import SelectLeague from "./components/SelectLeague";
 import Heading2 from "./components/Heading2";
 import MarginDiv from "./components/MarginDiv";
 
@@ -146,6 +118,10 @@ export default {
   data() {
     return {
       userName: "",
+      leagueName: [
+        { label: "セ・リーグ", value: "central", checked: true },
+        { label: "パ・リーグ", value: "pacific", checked: false }
+      ],
       selectLeague: "central",
       npb: { central: central, pacific: pacific },
       selectTeam: "",
@@ -417,7 +393,8 @@ export default {
     "generate-button": GenerateButton,
     "clear-button": ClearButton,
     "input-name": InputName,
-    heading2: Heading2,
+    "select-league": SelectLeague,
+    "heading2": Heading2,
     "margin-div": MarginDiv
   }
 };

@@ -1,7 +1,7 @@
 <template>
   <margin-div>
     <div class="row justify-content-center">
-      <div class="border">
+      <div>
         <heading2>リーグを選んでね</heading2>
           <template v-for="(option, index) in options">
             <div class="form-check form-check-inline" :key="index">
