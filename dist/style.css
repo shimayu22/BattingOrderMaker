@@ -2,10 +2,6 @@
   border: 2px dashed red;
 }
 
-.leagu-name {
-  font-size: 18pt;
-}
-
 #preview {
   overflow: auto;
   width: 500px;
