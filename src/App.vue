@@ -1,81 +1,85 @@
 <template>
-  <div id="app">
-    <input-name v-model="userName"></input-name>
-    <select-league v-model="selectLeague" :name="league-radio" :options="leagueName"></select-league>
-    <select-team v-model="selectTeam" :name="team" :options="npbTeam[selectLeague]"></select-team>
-    <margin-div>
-      <heading2>打順を組んでね</heading2>
-      <p>※重複するとその箇所が赤くなりますが、エラーにはなりません。</p>
-      <div>
-        <div v-for="(selectPlayer, index) in selectPlayers" :key="index" class="mt-2">
-          {{ index + 1 }} ：
-          <select
-            class="custom-select col-1"
-            v-model="selectPlayer.position"
-            :class="{ duplicated: selectPlayer.duplicatedPosition }"
-          >
-            <option disabled value>守備</option>
-            <option v-for="(position, index) in positions" :key="index">{{ position }}</option>
-          </select>
-
-          <select
-            class="custom-select col-4"
-            v-model="selectPlayer.player"
-            :class="{ duplicated: selectPlayer.duplicatedPlayer }"
-          >
-            <option disabled value>選手</option>
-            <option
-              v-for="(player, index) in players[selectTeam]"
-              :key="index"
-              :value="player"
-            >{{ player.name }}</option>
-          </select>
-        </div>
-      </div>
-    </margin-div>
-    <margin-div>
-      <heading2>プレビューだよ</heading2>
-      <div class="row justify-content-center">
-        <div>
-          <div id="preview" class="pb-4">
-            <div id="preview-inner">
-              <div id="team-name">{{ selectTeam }}</div>
-              <div id="user-name">{{ !!userName ? userName : 'ななしさん' }}</div>
-              <div id="today">{{ today }}</div>
-              <div v-for="(player, index) in selectPlayers" :key="index">
-                <div
-                  class="position"
-                  :style="(player.position === 'DH') ? { top: player.top, left: '86px' }:{ top: player.top }"
-                >{{ player.position }}</div>
-                <div class="player-name" :style="{ top: player.top }">{{ player.player.name }}</div>
-                <div
-                  class="number"
-                  :style="{ top: player.top, left: player.player.left }"
-                >{{ player.player.id }}</div>
-                <div class="bt" :style="{ top: player.top }">{{ player.player.bt }}</div>
+  <div class="container">
+    <div>
+      <div id="app">
+        <input-name v-model="userName"></input-name>
+        <select-league v-model="selectLeague" :name="league-radio" :options="leagueName"></select-league>
+        <select-team v-model="selectTeam" :name="team" :options="npbTeam[selectLeague]"></select-team>
+        <margin-div>
+          <heading2>打順を組んでね</heading2>
+          <p>※重複するとその箇所が赤くなりますが、エラーにはなりません。</p>
+          <div>
+            <div v-for="(selectPlayer, index) in selectPlayers" :key="index" class="mt-2">
+              {{ index + 1 }} ：
+              <select
+                class="custom-select col-1"
+                v-model="selectPlayer.position"
+                :class="{ duplicated: selectPlayer.duplicatedPosition }"
+              >
+                <option disabled value>守備</option>
+                <option v-for="(position, index) in positions" :key="index">{{ position }}</option>
+              </select>
+    
+              <select
+                class="custom-select col-4"
+                v-model="selectPlayer.player"
+                :class="{ duplicated: selectPlayer.duplicatedPlayer }"
+              >
+                <option disabled value>選手</option>
+                <option
+                  v-for="(player, index) in players[selectTeam]"
+                  :key="index"
+                  :value="player"
+                >{{ player.name }}</option>
+              </select>
+            </div>
+          </div>
+        </margin-div>
+        <margin-div>
+          <heading2>プレビューだよ</heading2>
+          <div class="row justify-content-center">
+            <div>
+              <div id="preview" class="pb-4">
+                <div id="preview-inner">
+                  <div id="team-name">{{ selectTeam }}</div>
+                  <div id="user-name">{{ !!userName ? userName : 'ななしさん' }}</div>
+                  <div id="today">{{ today }}</div>
+                  <div v-for="(player, index) in selectPlayers" :key="index">
+                    <div
+                      class="position"
+                      :style="(player.position === 'DH') ? { top: player.top, left: '86px' }:{ top: player.top }"
+                    >{{ player.position }}</div>
+                    <div class="player-name" :style="{ top: player.top }">{{ player.player.name }}</div>
+                    <div
+                      class="number"
+                      :style="{ top: player.top, left: player.player.left }"
+                    >{{ player.player.id }}</div>
+                    <div class="bt" :style="{ top: player.top }">{{ player.player.bt }}</div>
+                  </div>
+                </div>
               </div>
             </div>
           </div>
+        </margin-div>
+        <generate-button @click="generate"></generate-button>
+        <p class="mtb-2"></p>
+        <clear-button @click="resetData"></clear-button>
+        <hr />
+        <p class="text-center">↓ここに表示される画像を右クリック or 長押しで保存してください</p>
+        <p id="result"></p>
+        <!-- <button class="btn-primary btn-lg" @click="download">画像をダウンロード(PC用)</button> -->
+        <hr />
+    
+        <heading2>ここからツイートしてね</heading2>
+        <div class="row justify-content-center">
+          <button
+            class="btn btn-block btn-social btn-twitter btn-lg col-4 text-center"
+            @click="twitterShare"
+          >
+            <i class="fa fa-twitter"></i>ツイートする
+          </button>
         </div>
       </div>
-    </margin-div>
-    <generate-button @click="generate"></generate-button>
-    <p class="mtb-2"></p>
-    <clear-button @click="resetData"></clear-button>
-    <hr />
-    <p class="text-center">↓ここに表示される画像を右クリック or 長押しで保存してください</p>
-    <p id="result"></p>
-    <!-- <button class="btn-primary btn-lg" @click="download">画像をダウンロード(PC用)</button> -->
-    <hr />
-
-    <heading2>ここからツイートしてね</heading2>
-    <div class="row justify-content-center">
-      <button
-        class="btn btn-block btn-social btn-twitter btn-lg col-4 text-center"
-        @click="twitterShare"
-      >
-        <i class="fa fa-twitter"></i>ツイートする
-      </button>
     </div>
   </div>
 </template>

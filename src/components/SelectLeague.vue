@@ -1,24 +1,22 @@
 <template>
   <margin-div>
-    <div class="row justify-content-center">
-      <div>
-        <heading2>リーグを選んでね</heading2>
-          <template v-for="(option, index) in options">
-            <div class="form-check form-check-inline" :key="index">
-              <label class="form-check-label">
-                <input
-                  class="form-check-input"
-                  type="radio"
-                  :name="name"
-                  :value="option.value"
-                  :checked="option.checked"
-                  @change="updateValue"
-                />
-                <span class="leagu-name">{{ option.label }}</span>
-              </label>
-            </div>
-          </template>
-      </div>
+    <heading2>　リーグを選択してね　</heading2>
+    <div class="text-center">
+      <template v-for="(option, index) in options">
+        <div class="form-check form-check-inline" :key="index">
+          <label class="form-check-label form-control-lg">
+            <input
+              class="form-check-input"
+              type="radio"
+              :name="name"
+              :value="option.value"
+              :checked="option.checked"
+              @change="updateValue"
+            />
+            <span>{{ option.label }}</span>
+          </label>
+        </div>
+      </template>
     </div>
   </margin-div>
 </template>
