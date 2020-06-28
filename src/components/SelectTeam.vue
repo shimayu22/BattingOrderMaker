@@ -1,9 +1,9 @@
 <template>
   <margin-div>
-    <div class="border">
-      <heading2>球団を選んでね</heading2>
-      <select class="custom-select-lg" :name="name" @change="updateValue">
-        <option disabled selected value="" class="text-center">球団を選択してください</option>
+    <heading2>　チームを選択してね　</heading2>
+    <div>
+      <select class="form-control form-control-lg" :name="name" @change="updateValue">
+        <option disabled selected value="">球団を選択してください</option>
         <template v-for="(option, index) in options">
           <option :key="index" :value="option.teamLabel">
             {{ option.teamLabel }}
