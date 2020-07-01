@@ -7,21 +7,23 @@
         <select-team v-model="selectTeam" :name="team-select" :options="npbTeam[selectLeague]" ref="selectTeam"></select-team>
         <margin-div>
           <heading2>打順を組んでね</heading2>
-          <p>※重複するとその箇所が赤くなりますが、エラーにはなりません。</p>
+          <p>　※守備、選手が重複するとその箇所が赤くなります。　</p>
           <div>
-            <div v-for="(selectPlayer, index) in selectPlayers" :key="index" class="mt-2">
-              {{ index + 1 }} ：
+            <div v-for="(selectPlayer, index) in selectPlayers" :key="index" class="mt-2 row align-items-center">
+              <div class="col-1">
+                {{ index + 1 }}：
+              </div>
               <select
-                class="custom-select col-1"
+                class="form-control col-3"
                 v-model="selectPlayer.position"
                 :class="{ duplicated: selectPlayer.duplicatedPosition }"
               >
                 <option disabled value>守備</option>
                 <option v-for="(position, index) in positions" :key="index">{{ position }}</option>
               </select>
-    
+
               <select
-                class="custom-select col-4"
+                class="form-control col"
                 v-model="selectPlayer.player"
                 :class="{ duplicated: selectPlayer.duplicatedPlayer }"
               >
