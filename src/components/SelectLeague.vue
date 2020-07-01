@@ -12,6 +12,7 @@
               :value="option.value"
               :checked="option.checked"
               @change="updateValue"
+              :id="option.value"
             />
             <span>{{ option.label }}</span>
           </label>
@@ -39,8 +40,12 @@ export default {
     }
   },
   methods: {
-    updateValue: function(e) {
+    updateValue: function (e) {
       this.$emit("input", e.target.value);
+    },
+    checkCentral() {
+      let centralRadioButton = document.getElementById("central");
+      centralRadioButton.checked = true;
     }
   },
   components: {

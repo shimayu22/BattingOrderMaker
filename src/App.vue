@@ -3,8 +3,8 @@
     <div>
       <div id="app">
         <input-name v-model="userName"></input-name>
-        <select-league v-model="selectLeague" :name="league-radio" :options="leagueName"></select-league>
-        <select-team v-model="selectTeam" :name="team" :options="npbTeam[selectLeague]"></select-team>
+        <select-league v-model="selectLeague" :name="league-radio" :options="leagueName" ref="selectLeague"></select-league>
+        <select-team v-model="selectTeam" :name="team-select" :options="npbTeam[selectLeague]" ref="selectTeam"></select-team>
         <margin-div>
           <heading2>打順を組んでね</heading2>
           <p>※重複するとその箇所が赤くなりますが、エラーにはなりません。</p>
@@ -199,6 +199,8 @@ export default {
     resetData() {
       Object.assign(this.$data, this.$options.data());
       this.todaysDate();
+      this.$refs.selectLeague.checkCentral();
+      this.$refs.selectTeam.selectInit();
     },
     todaysDate() {
       let now = new Date();
