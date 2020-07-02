@@ -71,16 +71,8 @@
         <p id="result"></p>
         <!-- <button class="btn-primary btn-lg" @click="download">画像をダウンロード(PC用)</button> -->
         <hr />
-    
-        <heading2>ここからツイートしてね</heading2>
-        <div class="row justify-content-center">
-          <button
-            class="btn btn-block btn-social btn-twitter btn-lg col-4 text-center"
-            @click="twitterShare"
-          >
-            <i class="fa fa-twitter"></i>ツイートする
-          </button>
-        </div>
+        <twitter-button @click="twitterShare"></twitter-button>
+
       </div>
     </div>
   </div>
@@ -103,11 +95,12 @@ import central from "./assets/central.json";
 import pacific from "./assets/pacific.json";
 import hash from "./assets/hash.json";
 import html2canvas from "html2canvas";
-import GenerateButton from "./components/GenerateButton";
-import ClearButton from "./components/ClearButton";
 import InputName from "./components/InputName";
 import SelectLeague from "./components/SelectLeague";
 import SelectTeam from "./components/SelectTeam";
+import GenerateButton from "./components/GenerateButton";
+import ClearButton from "./components/ClearButton";
+import TwitterButton from "./components/TwitterButton";
 import Heading2 from "./components/Heading2";
 import MarginDiv from "./components/MarginDiv";
 
@@ -265,11 +258,12 @@ export default {
     this.todaysDate();
   },
   components: {
-    "generate-button": GenerateButton,
-    "clear-button": ClearButton,
     "input-name": InputName,
     "select-league": SelectLeague,
     "select-team": SelectTeam,
+    "generate-button": GenerateButton,
+    "clear-button": ClearButton,
+    "twitter-button": TwitterButton,
     "heading2": Heading2,
     "margin-div": MarginDiv
   }
