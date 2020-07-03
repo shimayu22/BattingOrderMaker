@@ -2,6 +2,7 @@
   <div class="container">
     <div>
       <div id="app">
+        <title-logo></title-logo>
         <input-name v-model="userName"></input-name>
         <select-league v-model="selectLeague" :name="league-radio" :options="leagueName" ref="selectLeague"></select-league>
         <select-team v-model="selectTeam" :name="team-select" :options="npbTeam[selectLeague]" ref="selectTeam"></select-team>
@@ -95,6 +96,7 @@ import central from "./assets/central.json";
 import pacific from "./assets/pacific.json";
 import hash from "./assets/hash.json";
 import html2canvas from "html2canvas";
+import Title from "./components/Title";
 import InputName from "./components/InputName";
 import SelectLeague from "./components/SelectLeague";
 import SelectTeam from "./components/SelectTeam";
@@ -258,6 +260,7 @@ export default {
     this.todaysDate();
   },
   components: {
+    "title-logo": Title,
     "input-name": InputName,
     "select-league": SelectLeague,
     "select-team": SelectTeam,
