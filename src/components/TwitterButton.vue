@@ -1,15 +1,22 @@
 <template>
-  <margin-div>
-    <heading3>ここからツイートしてね</heading3>
-    <div>
-      <button 
-        class="btn btn-block btn-social btn-twitter btn-lg"
-        @click="$emit('click')"
-      >
-        <i class="fa fa-twitter"></i>打順をツイートする
-      </button>
+  <div class="mt-1 mb-1">
+    <div class="row justify-content-center">
+      <div>
+        <heading3>ここからツイートしてね</heading3>
+        <div>
+          <button 
+            class="btn btn-block btn-social btn-twitter btn-lg"
+            @click="$emit('click')"
+          >
+            <i class="fa fa-twitter"></i>
+            <div class="text-center">
+              打順をツイートする
+            </div>
+          </button>
+        </div>
+      </div>
     </div>
-  </margin-div>
+  </div>
 </template>
 
 <script>

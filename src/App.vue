@@ -3,6 +3,7 @@
     <div>
       <div id="app">
         <title-logo></title-logo>
+        <hr>
         <input-name v-model="userName"></input-name>
         <select-league v-model="selectLeague" :name="league-radio" :options="leagueName" ref="selectLeague"></select-league>
         <select-team v-model="selectTeam" :name="team-select" :options="npbTeam[selectLeague]" ref="selectTeam"></select-team>
@@ -67,11 +68,11 @@
         <generate-button @click="generate"></generate-button>
         <p class="mtb-2"></p>
         <clear-button @click="resetData"></clear-button>
-        <hr />
+        <hr>
         <p class="text-center">↓ここに表示される画像を右クリック or 長押しで保存してください</p>
         <p id="result"></p>
         <!-- <button class="btn-primary btn-lg" @click="download">画像をダウンロード(PC用)</button> -->
-        <hr />
+        <hr>
         <twitter-button @click="twitterShare"></twitter-button>
 
       </div>
