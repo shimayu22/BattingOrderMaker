@@ -18,3 +18,4 @@ yarn-error.log
 !dist/favicon.ico
 !dist/ogp.png
 !dist/bootstrap-social.css
+!dist/title_logo.png
