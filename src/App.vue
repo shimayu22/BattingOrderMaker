@@ -69,8 +69,10 @@
         <p class="mtb-2"></p>
         <clear-button @click="resetData"></clear-button>
         <hr>
-        <p class="text-center">↓ここに表示される画像を右クリック or 長押しで保存してください</p>
-        <p id="result"></p>
+        <div class="text-center">
+          <p>↓ここに表示される画像を右クリック or 長押しで保存してください</p>
+          <p id="result"></p>
+        </div>
         <!-- <button class="btn-primary btn-lg" @click="download">画像をダウンロード(PC用)</button> -->
         <hr>
         <twitter-button @click="twitterShare"></twitter-button>
@@ -163,6 +165,7 @@ export default {
         img.width = "500";
         img.height = "500";
         img.id = "resultImg";
+        img.classList.add("img-fluid");
 
         let parentElement = document.getElementById("result").parentNode;
         let p = document.getElementById("result");
