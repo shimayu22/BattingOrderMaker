@@ -39,32 +39,7 @@
             </div>
           </div>
         </margin-div>
-        <margin-div>
-          <heading2>プレビューだよ</heading2>
-          <div class="row justify-content-center">
-            <div>
-              <div id="preview" class="pb-4">
-                <div id="preview-inner">
-                  <div id="team-name">{{ selectTeam }}</div>
-                  <div id="user-name">{{ !!userName ? userName : 'ななしさん' }}</div>
-                  <div id="today">{{ today }}</div>
-                  <div v-for="(player, index) in selectPlayers" :key="index">
-                    <div
-                      class="position"
-                      :style="(player.position === 'DH') ? { top: player.top, left: '86px' }:{ top: player.top }"
-                    >{{ player.position }}</div>
-                    <div class="player-name" :style="{ top: player.top }">{{ player.player.name }}</div>
-                    <div
-                      class="number"
-                      :style="{ top: player.top, left: player.player.left }"
-                    >{{ player.player.id }}</div>
-                    <div class="bt" :style="{ top: player.top }">{{ player.player.bt }}</div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </margin-div>
+        <order-preview :selectTeam="selectTeam" :userName="userName" :today="today" :selectPlayers="selectPlayers"></order-preview>
         <generate-button @click="generate"></generate-button>
         <p class="mtb-2"></p>
         <clear-button @click="resetData"></clear-button>
@@ -103,6 +78,7 @@ import Title from "./components/Title";
 import InputName from "./components/InputName";
 import SelectLeague from "./components/SelectLeague";
 import SelectTeam from "./components/SelectTeam";
+import OrderPreview from "./components/OrderPreview";
 import GenerateButton from "./components/GenerateButton";
 import ClearButton from "./components/ClearButton";
 import TwitterButton from "./components/TwitterButton";
@@ -268,6 +244,7 @@ export default {
     "input-name": InputName,
     "select-league": SelectLeague,
     "select-team": SelectTeam,
+    "order-preview": OrderPreview,
     "generate-button": GenerateButton,
     "clear-button": ClearButton,
     "twitter-button": TwitterButton,
